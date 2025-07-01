@@ -17,12 +17,12 @@ const MainLayoutPublic = ({
     url,
     ...props
 }: MainLayoutPublicProps) => {
-    const defaultTitle = process.env.title || 'My Website';
-    const defaultDescription = process.env.titleDescription || 'Welcome to our website';
+    const defaultTitle = process.env.title || 'Auto Fusion';
+    const defaultDescription = process.env.titleDescription || 'Welcome to Auto Fusion';
     const defaultImage = process.env.defaultImage || '/static/images/og-image.jpg';
     const defaultUrl = process.env.defaultUrl || 'https://example.com';
 
-    const titleView = title ? `${defaultTitle} | ${title}` : `${defaultTitle} | ${defaultDescription}`;
+    const titleView = title ? `${title} | ${defaultTitle}` : `${defaultDescription} | ${defaultTitle}`;
     const descriptionView = description || defaultDescription;
     const imageView = image || defaultImage;
     const urlView = url || defaultUrl;

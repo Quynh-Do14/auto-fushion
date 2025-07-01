@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import Rating from './Rating';
 import useProduct from '@/infrastructure/hook/useProduct';
+import { ROUTE_PATH } from '@/core/common/appRouter';
+import { convertSlug } from '@/infrastructure/helper/helper';
 type Props = {
     product: any
 }
@@ -12,7 +14,7 @@ const Product = (props: Props) => {
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">
-                <Link href="/product/[pid]" as={`/product/${product.id}`}>
+                <Link href={`${ROUTE_PATH.PRODUCT}/${convertSlug(product.name)}-${product.id}.html`}>
                     <a>{thumbnailImage(product)}</a>
                 </Link>
                 {badge(product)}

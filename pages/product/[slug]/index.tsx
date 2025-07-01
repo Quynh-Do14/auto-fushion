@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import ProductDetail from '../../../components/product/slug/ProductDetail';
 import RelatedProduct from '../../../components/product/slug/RelatedProduct';
 import productService from '@/infrastructure/repository/product/product.service';
+import { splitTakeId } from '@/infrastructure/helper/helper';
 
 const SlugProductPage = () => {
     const router = useRouter();
@@ -14,24 +15,22 @@ const SlugProductPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
     const onGetProductByIdAsync = async () => {
-        if (query.slug === undefined) return;
-        setLoading(true)
+        const slug = splitTakeId(String(query.slug));
+
+        if (!query.slug) return; // đảm bảo có slug mới gọi API
+
         try {
-            await productService.GetProductById(
-                String(query.slug),
-                setLoading
-            ).then((res) => {
-                setProduct(res)
-            })
+            const res = await productService.GetProductById(String(slug), setLoading);
+            setProduct(res);
+        } catch (error) {
+            console.error(error);
         }
-        catch (error) {
-            console.error(error)
-        }
-    }
+    };
 
     useEffect(() => {
-        onGetProductByIdAsync().then(_ => { });
-    }, [query]);
+        onGetProductByIdAsync();
+    }, [query.slug]); // chỉ re-run khi query.slug thay đổi
+
     const breadCrumb = [
         {
             text: 'Trang chủ',
@@ -45,6 +44,7 @@ const SlugProductPage = () => {
             text: product ? product.name : 'Loading...',
         },
     ];
+
     let productView;
     if (!loading) {
         if (product) {
@@ -55,7 +55,11 @@ const SlugProductPage = () => {
     }
 
     return (
-        <MainLayoutPublic>
+        <MainLayoutPublic
+            title={product.name}
+            description={product.description}
+            image={product?.images?.[0]}
+        >
             <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
             <div className="ps-page--product">
                 <div className="ps-container">

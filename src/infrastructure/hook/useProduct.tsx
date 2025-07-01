@@ -2,7 +2,8 @@ import React, { JSX } from 'react';
 import LazyLoad from 'react-lazyload';
 import Link from 'next/link';
 import NotFoundImg from '@/asset/img/not-found.jpg'
-import { configImageURL, formatCurrency } from '../helper/helper';
+import { configImageURL, convertSlug, formatCurrency } from '../helper/helper';
+import { ROUTE_PATH } from '@/core/common/appRouter';
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 
 interface ImageFormat {
@@ -33,9 +34,9 @@ interface ProductPayload {
 
 export default function useProduct() {
   return {
-    thumbnailImage: (payload: ProductPayload): JSX.Element | null => {
+    thumbnailImage: (payload: ProductPayload): JSX.Element => {
 
-      if (payload?.images) {
+      if (payload?.images?.length) {
         return (
           <LazyLoad>
             <img
@@ -45,7 +46,13 @@ export default function useProduct() {
           </LazyLoad>
         );
       }
-      return null;
+      else {
+        return (
+          <LazyLoad>
+            <img src={NotFoundImg.src} alt={payload.name} />
+          </LazyLoad>
+        )
+      }
     },
 
     price: (payload: ProductPayload): JSX.Element => {
@@ -135,21 +142,9 @@ export default function useProduct() {
       return undefined;
     },
 
-    brand: (payload: ProductPayload): JSX.Element => {
-      const brandName =
-        payload.brands && payload.brands.length > 0
-          ? payload.brands[0].name
-          : 'No Brand';
-      return (
-        <Link href="/shop">
-          <a className="text-capitalize">{brandName}</a>
-        </Link>
-      );
-    },
-
     name: (payload: ProductPayload): JSX.Element => {
       return (
-        <Link href="/product/[pid]" as={`/product/${payload.id}`}>
+        <Link href={`${ROUTE_PATH.PRODUCT}/${convertSlug(payload.name)}-${payload.id}.html`}>
           <a className="ps-product__name">{payload.name}</a>
         </Link>
       );

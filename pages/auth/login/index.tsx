@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MainLayoutPublic from '@/infrastructure/common/layout/MainLayout';
 import BreadCrumb from '@/infrastructure/common/breadcrumb/BreadCrumb';
 import { Form, Input } from 'antd';
-import Router from 'next/router';
+import router from 'next/router';
 import Link from 'next/link';
+import authService from '@/infrastructure/repository/auth/auth.service';
+import { ROUTE_PATH } from '@/core/common/appRouter';
 
 const LoginPage = () => {
     const breadCrumb = [
@@ -15,9 +17,29 @@ const LoginPage = () => {
             text: 'Đăng nhập',
         },
     ];
-    const handleLoginSubmit = () => {
-        Router.push('/');
+    const [loading, setLoading] = useState<boolean>(false)
+
+    const handleLoginSubmit = async (values: any) => {
+        console.log("values", values);
+
+        try {
+            const response = await authService.login(
+                {
+                    email: values.email,
+                    password: values.password,
+                },
+                () => { },
+                setLoading
+            );
+
+            if (response) {
+                router.push(ROUTE_PATH.HOMEPAGE);
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+        }
     };
+
 
     return (
         <MainLayoutPublic>
@@ -42,10 +64,10 @@ const LoginPage = () => {
                             </ul>
                             <div className="ps-tab active" id="sign-in">
                                 <div className="ps-form__content">
-                                    <h5>Đăng kí tài khoản</h5>
+                                    <h5>Đăng nhập vào hệ thống</h5>
                                     <div className="form-group">
                                         <Form.Item
-                                            name="username"
+                                            name="email"
                                             rules={[
                                                 {
                                                     required: true,
@@ -54,7 +76,7 @@ const LoginPage = () => {
                                             ]}>
                                             <Input
                                                 className="form-control"
-                                                type="text"
+                                                type="email"
                                                 placeholder="Username or email address"
                                             />
                                         </Form.Item>

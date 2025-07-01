@@ -22,7 +22,7 @@ const HeaderDefault = () => {
                     <div className="header__left">
                         <Link href={"/"}>
                             <div className="ps-logo">
-                                <Image src={logo} alt="" width={180} height={60}/>
+                                <Image src={logo} alt="autofushion" width={180} height={60} />
                             </div>
                         </Link>
                     </div>

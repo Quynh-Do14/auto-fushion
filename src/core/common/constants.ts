@@ -21,11 +21,40 @@ export default class Constants {
 
       },
       {
-        id: 4 ,
+        id: 4,
         text: 'Tin tức',
         url: ROUTE_PATH.BLOG,
       },
+    ]
+    static PrivateList = [
+      {
+        id: 1,
+        text: 'Quản lý người dùng',
+        url: ROUTE_PATH.HOMEPAGE,
+        icon: ""
+      },
+      {
+        id: 2,
+        text: 'Quản lý danh mục sản phẩm',
+        url: ROUTE_PATH.CATEGORY,
 
+      },
+      {
+        id: 3,
+        text: 'Quản lý sản phẩm',
+        url: ROUTE_PATH.PRODUCT,
+
+      },
+      {
+        id: 4,
+        text: 'Quản lý danh mục tin tức',
+        url: ROUTE_PATH.BLOG,
+      },
+      {
+        id: 4,
+        text: 'Quản lý tin tức',
+        url: ROUTE_PATH.BLOG,
+      },
     ]
   }
 

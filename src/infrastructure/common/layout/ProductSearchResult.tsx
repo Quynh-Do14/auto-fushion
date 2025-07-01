@@ -1,6 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Rating from '../product/Rating';
+import { ROUTE_PATH } from '@/core/common/appRouter';
+import { convertSlug } from '@/infrastructure/helper/helper';
 type Props = {
     product: any;
 };
@@ -10,7 +12,7 @@ const ProductSearchResult = (props: Props) => {
     return (
         <div className="ps-product ps-product--wide ps-product--search-result">
             <div className="ps-product__thumbnail">
-                <Link href="/product/[pid]" as={`/product/${product.id}`}>
+                <Link href={`${ROUTE_PATH.PRODUCT}/${convertSlug(product.name)}-${product.id}.html`}>
                     <div>{product.id}</div>
                 </Link>
             </div>

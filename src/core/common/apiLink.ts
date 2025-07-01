@@ -1,8 +1,8 @@
 export class Endpoint {
     static Auth = class {
-        static Login = "/dangnhap"
-        static Register = "/dangki"
-        static Profile = "/profile/detail"
+        static Login = "/auth/login"
+        static Register = "auth/register"
+        static Profile = "/users/profile/detail"
         static RefreshToken = "/auth/refresh-token"
     }
     static Product = class {
@@ -18,5 +18,12 @@ export class Endpoint {
         static Add = "/category"
         static Update = "/category"
         static Delete = "/category"
+    }
+    static User = class {
+        static Get = "/users"
+        static GetById = "/users"
+        static Create = "/users"
+        static Update = "/users"
+        static Delete = "/users"
     }
 }

@@ -42,7 +42,7 @@ const RegisterPage = () => {
                             </ul>
                             <div className="ps-tab active" id="sign-in">
                                 <div className="ps-form__content">
-                                    <h5>Đăng nhập vào hệ thống</h5>
+                                    <h5>Đăng kí tài khoản</h5>
                                     <div className="form-group">
                                         <Form.Item
                                             name="username"
