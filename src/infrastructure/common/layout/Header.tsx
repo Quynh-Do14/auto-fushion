@@ -5,6 +5,7 @@ import logo from "@/asset/img/logo.png"
 import Image from 'next/image';
 import SearchHeader from './SearchHeader';
 import NavigationDefault from './Navigation';
+import HeaderActions from './HeaderActions';
 const HeaderDefault = () => {
     useEffect(() => {
         if (process.browser) {
@@ -22,7 +23,15 @@ const HeaderDefault = () => {
                     <div className="header__left">
                         <Link href={"/"}>
                             <div className="ps-logo">
-                                <Image src={logo} alt="autofushion" width={180} height={60} />
+                                <img
+                                    src={logo.src}
+                                    alt="autofusion"
+                                    style={{
+                                        width: '100%',
+                                        maxWidth: '280px',
+                                        height: 'auto',
+                                    }}
+                                />
                             </div>
                         </Link>
                     </div>
@@ -30,7 +39,7 @@ const HeaderDefault = () => {
                         <SearchHeader />
                     </div>
                     <div className="header__right">
-                        {/* <HeaderActions /> */}
+                        <HeaderActions />
                     </div>
                 </div>
             </div>

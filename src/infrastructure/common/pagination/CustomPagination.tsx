@@ -33,7 +33,7 @@ const CustomPagination = ({ currentPage, total, totalPage, onChangePage }: Props
     const renderPageNumbers = () => {
         const pages: number[] = [];
 
-        for (let i = 1; i <= total; i++) {
+        for (let i = 1; i <= totalPage; i++) {
             pages.push(i);
         }
 

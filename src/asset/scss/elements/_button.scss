@@ -80,7 +80,7 @@ button {
 .ps-btn,
 button.ps-btn {
     display: inline-block;
-    padding: 15px 45px;
+    padding: 15px 12px;
     font-size: 16px;
     font-weight: 600;
     line-height: 20px;
@@ -138,21 +138,26 @@ button.ps-btn {
 
     &.ps-btn--reverse {
         background-color: #576391;
-
+        width: 100%;
+        text-align: center;
         &:hover {
             background-color: $color-2nd;
         }
+
     }
 
     &.ps-btn--gray {
         background-color: #e5e5e5;
         color: #000000;
         font-size: 1.6rem;
+        width: 100%;
+        text-align: center;
     }
 
     &.ps-btn--black {
         background-color: $color-heading;
-
+        width: 100%;
+        text-align: center;
         &.ps-btn--outline {
             background-color: transparent;
             border: 2px solid $color-heading;

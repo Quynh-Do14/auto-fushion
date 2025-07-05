@@ -6,7 +6,7 @@ import {
     WarningOutlined,
 } from '@ant-design/icons';
 import { ReactNode } from 'react';
-import styles from "@/asset/css/common.module.css";
+import styles from "@/asset/css/common/common.module.css";
 
 type ToastOptions = {
     duration?: number;

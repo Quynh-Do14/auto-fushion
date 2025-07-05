@@ -3,11 +3,10 @@ import HeaderDefault from './Header';
 import FooterWidgets from './Footer';
 import HeaderMobile from './HeaderMobile';
 import MasterLayout from './MasterLayout';
-import PageLoader from '../loader/PageLoader';
-import NavigationList from './NavigationList';
 import categoryProductService from '@/infrastructure/repository/category/categoryProduct.service';
 import { useRecoilState } from 'recoil';
-import { CategoryProductState } from '@/core/atoms/category/categoryState';
+import { CategoryBlogState, CategoryProductState } from '@/core/atoms/category/categoryState';
+import categoryBlogService from '@/infrastructure/repository/category/categoryBlog.service';
 
 type Props = {
     component: any
@@ -16,15 +15,12 @@ type Props = {
 const MainLayoutComponent = (props: Props) => {
     const { component } = props;
     const [, setCategoryProductState] = useRecoilState(CategoryProductState);
+    const [, setCategoryBlogState] = useRecoilState(CategoryBlogState);
 
     const onGetListCategoryAsync = async () => {
-        const param = {
-            page: 1,
-            size: 8,
-        }
         try {
             await categoryProductService.GetCategory(
-                param,
+                {},
                 () => { }
             ).then((res) => {
                 setCategoryProductState({
@@ -37,8 +33,25 @@ const MainLayoutComponent = (props: Props) => {
         }
     }
 
+    const onGetListBlogCategoryAsync = async () => {
+        try {
+            await categoryBlogService.GetBlogCategory(
+                {},
+                () => { }
+            ).then((res) => {
+                setCategoryBlogState({
+                    data: res.data
+                })
+            })
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
+
     useEffect(() => {
         onGetListCategoryAsync().then(_ => { });
+        onGetListBlogCategoryAsync().then(_ => { });
     }, []);
     return (
         <>

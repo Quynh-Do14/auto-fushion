@@ -47,7 +47,7 @@ class CategoryProductService {
         setLoading(true)
         try {
             return await RequestService
-                .post(Endpoint.Category.Add,
+                .postForm(Endpoint.Category.Add,
                     data
                 )
                 .then(response => {
@@ -70,7 +70,7 @@ class CategoryProductService {
         setLoading(true)
         try {
             return await RequestService
-                .put(`${Endpoint.Category.Update}/${id}`,
+                .putForm(`${Endpoint.Category.Update}/${id}`,
                     data
                 )
                 .then(response => {

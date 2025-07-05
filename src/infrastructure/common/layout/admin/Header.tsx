@@ -1,4 +1,4 @@
-import styles from "@/asset/css/layout.module.css";
+import styles from "@/asset/css/admin/layout.module.css";
 import avatar from "@/asset/img/avatar.png"
 import Image from "next/image";
 import BreadCrumb from "../../breadcrumb/BreadCrumb";

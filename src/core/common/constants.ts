@@ -30,32 +30,41 @@ export default class Constants {
       {
         id: 1,
         text: 'Quản lý người dùng',
-        url: ROUTE_PATH.HOMEPAGE,
-        icon: ""
+        url: ROUTE_PATH.USER_MANAGEMENT,
+        icon: 'fas fa-users'
       },
       {
         id: 2,
-        text: 'Quản lý danh mục sản phẩm',
-        url: ROUTE_PATH.CATEGORY,
-
+        text: 'Quản lý thương hiệu',
+        url: ROUTE_PATH.BRAND_MANAGEMENT, // nếu bạn có ROUTE_PATH này riêng
+        icon: 'fas fa-tags'
       },
       {
         id: 3,
+        text: 'Quản lý danh mục sản phẩm',
+        url: ROUTE_PATH.CATEGORY_PRODUCT_MANAGEMENT,
+        icon: 'fas fa-th-large'
+      },
+      {
+        id: 4,
         text: 'Quản lý sản phẩm',
-        url: ROUTE_PATH.PRODUCT,
-
+        url: ROUTE_PATH.PRODUCT_MANAGEMENT,
+        icon: 'fas fa-boxes'
       },
       {
-        id: 4,
+        id: 5,
         text: 'Quản lý danh mục tin tức',
-        url: ROUTE_PATH.BLOG,
+        url: ROUTE_PATH.CATEGORY_BLOG_MANAGEMENT,
+        icon: 'fas fa-folder-open'
       },
       {
-        id: 4,
+        id: 6,
         text: 'Quản lý tin tức',
-        url: ROUTE_PATH.BLOG,
+        url: ROUTE_PATH.BLOG_MANAGEMENT,
+        icon: 'fas fa-newspaper'
       },
     ]
+
   }
 
 
@@ -98,29 +107,26 @@ export default class Constants {
   static UseParams = class {
     static Id = ':id'
   }
-
-  static TabSelect = class {
+  static Roles = class {
     static List = [
-      { label: 'Cá nhân', value: 1 },
-      { label: 'Gian hàng', value: 2 }
+      {
+        label: 'Quản trị viên',
+        value: 1
+      },
+      {
+        label: 'Seller',
+        value: 2
+      },
+      {
+        label: 'Viết bài',
+        value: 3
+      },
+      {
+        label: 'Người dùng',
+        value: 4
+      }
     ]
   }
-
-  static Gender = class {
-    static MALE = class {
-      static value = true
-      static label = 'Nam'
-    }
-    static FEMALE = class {
-      static value = false
-      static label = 'Nữ'
-    }
-    static List = [
-      { label: 'Nam', value: true },
-      { label: 'Nữ', value: false }
-    ]
-  }
-
   static AdminStatusConfig = class {
     static Show = [
       {

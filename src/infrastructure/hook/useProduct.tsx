@@ -40,6 +40,7 @@ export default function useProduct() {
         return (
           <LazyLoad>
             <img
+              className="product-image"
               src={configImageURL(payload.images[0])}
               alt={payload.name}
             />
@@ -49,7 +50,7 @@ export default function useProduct() {
       else {
         return (
           <LazyLoad>
-            <img src={NotFoundImg.src} alt={payload.name} />
+            <img className="product-image" src={NotFoundImg.src} alt={payload.name} />
           </LazyLoad>
         )
       }

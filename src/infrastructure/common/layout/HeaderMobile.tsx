@@ -9,7 +9,15 @@ const HeaderMobile = () => {
         <div className='navigation__left'>
           <Link href='/'>
             <a className='ps-logo'>
-              <Image src={logo} alt="" width={180} height={60} />
+              <img
+                src={logo.src}
+                alt="autofusion"
+                style={{
+                  width: '100%',
+                  maxWidth: '280px',
+                  height: 'auto',
+                }}
+              />
             </a>
           </Link>
         </div>

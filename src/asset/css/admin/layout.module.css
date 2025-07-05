@@ -36,7 +36,10 @@
 }
 
 .menu li {
-  margin: 15px 0;
+  margin: 18px 0;
+}
+.menu li i {
+  color: #000;
 }
 
 .menu a {

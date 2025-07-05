@@ -1,7 +1,6 @@
-'use client';
 import React, { useEffect, useState } from 'react';
 import { Table, Input, Pagination, Space, Button } from 'antd';
-import styles from '@/asset/css/admin-component.module.css';
+import styles from '@/asset/css/admin/admin-component.module.css';
 import AdminLayout from '@/infrastructure/common/layout/admin/MainLayout';
 import ButtonCommon from '@/infrastructure/common/button/ButtonCommon';
 import userService from '@/infrastructure/repository/user/user.service';
@@ -10,6 +9,10 @@ import Constants from '@/core/common/constants';
 import { TitleTableCommon } from '@/infrastructure/common/text/title-table-common';
 import { ActionCommon } from '@/infrastructure/common/action/action-common';
 import { ROUTE_PATH } from '@/core/common/appRouter';
+import ButtonHref from '@/infrastructure/common/button/ButtonHref';
+import DialogConfirmCommon from '@/infrastructure/common/modal/dialogConfirm';
+import { FullPageLoading } from '@/infrastructure/common/loader/loading';
+import { PaginationCommon } from '@/infrastructure/common/pagination/PaginationPageSize';
 
 let timeout: any
 const UserListPage = () => {
@@ -27,27 +30,27 @@ const UserListPage = () => {
 
     const router = useRouter();
 
-    const onGetListAsync = async ({ name = "", size = pageSize, page = currentPage }) => {
+    const onGetListAsync = async ({ search = "", size = pageSize, page = currentPage }) => {
         const param = {
-            page: page - 1,
-            size: size,
-            keyword: name,
+            page: page,
+            limit: size,
+            search: search,
         }
         try {
             await userService.GetUser(
                 param,
                 setLoading
             ).then((res) => {
-                setListResponse(res.content)
-                setTotal(res.page.totalElements)
+                setListResponse(res.data)
+                setTotal(res.total)
             })
         }
         catch (error) {
             console.error(error)
         }
     }
-    const onSearch = async (name = "", size = pageSize, page = 1) => {
-        await onGetListAsync({ name: name, size: size, page: page });
+    const onSearch = async (search = "", size = pageSize, page = 1) => {
+        await onGetListAsync({ search: search, size: size, page: page });
     };
 
     const onChangeSearchText = (e: any) => {
@@ -64,13 +67,13 @@ const UserListPage = () => {
 
     const onChangePage = async (value: any) => {
         setCurrentPage(value)
-        await onSearch(searchText, pageSize, value,).then(_ => { });
+        await onSearch(searchText, pageSize, value).then(_ => { });
     };
 
     const onPageSizeChanged = async (value: any) => {
         setPageSize(value)
         setCurrentPage(1)
-        await onSearch(searchText, value, 1,).then(_ => { });
+        await onSearch(searchText, value, 1).then(_ => { });
     };
     // Xóa bài
     const onOpenModalDelete = (id: any) => {
@@ -102,21 +105,22 @@ const UserListPage = () => {
         <AdminLayout
             breadcrumb={"Quản lý người dùng"}
             title={"Quản lý người dùng"}
-            redirect={"/admin/user-management"}
+            redirect={ROUTE_PATH.USER_MANAGEMENT}
         >
             <div className={styles.manage_container}>
                 <h2>Quản lý người dùng</h2>
                 <div className={styles.searchBar}>
                     <Input
                         className="form-control"
-                        placeholder="Tìm kiếm theo tên hoặc email"
+                        placeholder="Tìm kiếm theo tên"
                         value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
+                        onChange={onChangeSearchText}
                     />
-                    <ButtonCommon
-                        onClick={() => { }}
+                    <ButtonHref
+                        href={ROUTE_PATH.ADD_USER_MANAGEMENT}
                         title={'Thêm mới'}
                         width={150}
+                        variant={'ps-btn--fullwidth'}
                     />
                 </div>
                 <div className={styles.table_container}>
@@ -151,16 +155,6 @@ const UserListPage = () => {
                         <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Tên đăng nhập"
-                                    width={'200px'}
-                                />
-                            }
-                            key={"username"}
-                            dataIndex={"username"}
-                        />
-                        <Table.Column
-                            title={
-                                <TitleTableCommon
                                     title="Email"
                                     width={'100px'}
                                 />
@@ -171,57 +165,12 @@ const UserListPage = () => {
                         <Table.Column
                             title={
                                 <TitleTableCommon
-                                    title="Đường dẫn cá nhân"
-                                    width={'300px'}
-                                />
-                            }
-                            key={"pathName"}
-                            dataIndex={"pathName"}
-                            render={(val) => {
-                                return (
-                                    <div>{val ? `idai.vn/${val}` : ""} </div>
-                                )
-                            }}
-                        />
-                        <Table.Column
-                            title={
-                                <TitleTableCommon
-                                    title="Khả dụng"
-                                    width={'150px'}
-                                />
-                            }
-                            key={"enabled"}
-                            dataIndex={"enabled"}
-                            render={(val) => {
-                                if (val) {
-                                    return (
-                                        <div className='bg-[#0d9e6d] py-2 w-full h-full'>
-                                            <div className='text-[#ffffff] font-semibold text-center'>
-                                                Khả dụng
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                                else {
-                                    return (
-                                        <div className='bg-[#ff443d] py-2 w-full h-full'>
-                                            <div className='text-[#ffffff] font-semibold text-center'>
-                                                Không khả dụng
-                                            </div>
-                                        </div>
-                                    )
-                                }
-                            }}
-                        />
-                        <Table.Column
-                            title={
-                                <TitleTableCommon
                                     title="Vai trò"
                                     width={'100px'}
                                 />
                             }
-                            key={"roles"}
-                            dataIndex={"roles"}
+                            key={"role_name"}
+                            dataIndex={"role_name"}
                         />
 
                         <Table.Column
@@ -238,24 +187,32 @@ const UserListPage = () => {
                                 <ActionCommon
                                     onClickDetail={() => router.push(`${ROUTE_PATH.USER_MANAGEMENT}/${record.id}`)}
                                     onClickDelete={() => onOpenModalDelete(record.id)}
-
                                 />
                             )}
                         />
                     </Table>
-
-
                 </div>
                 <div className={styles.pagination}>
-                    <Pagination
-                        current={currentPage}
+                    <PaginationCommon
+                        currentPage={currentPage}
                         pageSize={pageSize}
                         total={total}
-                        onChange={(page) => setCurrentPage(page)}
-                        showSizeChanger={false}
+                        onChangePage={onChangePage}
+                        onChangeSize={onPageSizeChanged}
+                        disabled={false}
                     />
                 </div>
+                <DialogConfirmCommon
+                    message={"Bạn có muốn xóa người dùng này ra khỏi hệ thống"}
+                    titleCancel={"Bỏ qua"}
+                    titleOk={"Xóa"}
+                    visible={isDeleteModal}
+                    handleCancel={onCloseModalDelete}
+                    handleOk={onDeleteAsync}
+                    title={"Xác nhận"}
+                />
             </div>
+            <FullPageLoading isLoading={loading} />
         </AdminLayout>
 
     );

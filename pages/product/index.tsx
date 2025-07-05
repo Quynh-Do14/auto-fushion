@@ -76,11 +76,9 @@ const ProductPage = () => {
         setCurrentPage(page);
         router.push(`/product?page=${page}`);
         await onSearch(searchText, pageSize, page, minPrice, maxPrice, categoryId).then(_ => { });
-
     }
 
     useEffect(() => {
-
         const parsedMinPrice = parseInt(min_price as string) || 0;
         const parsedMaxPrice = parseInt(max_price as string) || 200000000;
         const parsedPage = parseInt(page as string) || 1;
@@ -97,7 +95,6 @@ const ProductPage = () => {
 
         onSearch(parsedSearch, parsedLimit, parsedPage, parsedMinPrice, parsedMaxPrice, parsedCategory);
     }, [router.query]);
-
 
     return (
         <MainLayoutPublic>

@@ -4,14 +4,31 @@ type Props = {
 }
 const TabSpecification = (props: Props) => {
     const { product } = props;
+    const figure = [
+        {
+            key: "RAM",
+            value: 128
+        },
+        {
+            key: "ROM",
+            value: 128
+        }
+    ]
     return (
         <div className="table-responsive">
             <table className="table table-bordered ps-table ps-table--specification">
                 <tbody>
-                    <tr>
-                        <td>Color</td>
-                        <td>Black, Gray</td>
-                    </tr>
+                    {
+                        figure.map((item, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{item.key}</td>
+                                    <td>{item.value}</td>
+                                </tr>
+                            )
+                        })
+                    }
+
                     <tr>
                         <td>Style</td>
                         <td>Ear Hook</td>

@@ -18,9 +18,20 @@
 
 .manage_container h2 {
   font-size: 18px;
-  font-weight: 600 ;
+  font-weight: 600;
   margin: 0;
 }
+.manage_container .headerPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.manage_container .headerPage .btn_container {
+  display: flex;
+  gap: 12px;
+}
+
 .manage_container .table_container {
   flex: 1;
   overflow-y: auto;
@@ -31,4 +42,10 @@
 .manage_container .pagination {
   text-align: right;
   flex-shrink: 0;
+}
+
+.manage_container .form_container {
+  border: 1px solid #ccc;
+  height: 100%;
+  padding: 20px;
 }

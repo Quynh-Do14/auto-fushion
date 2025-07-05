@@ -24,6 +24,10 @@ export const ROUTE_PATH = {
 
     PRODUCT_MANAGEMENT: `${PREFIX_ADMIN}/product-management`,
     ADD_PRODUCT_MANAGEMENT: `${PREFIX_ADMIN}/product-management/add`,
+
+
+    BRAND_MANAGEMENT: `${PREFIX_ADMIN}/brand-management`,
+    ADD_BRAND_MANAGEMENT: `${PREFIX_ADMIN}/brand-management/add`,
     // ADMIN
 
 }
