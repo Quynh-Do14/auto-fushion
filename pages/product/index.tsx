@@ -26,6 +26,7 @@ const ProductPage = () => {
     const [listProduct, setListProduct] = useState<Array<any>>([])
     const [searchText, setSearchText] = useState<string>("");
     const [totalPage, setTotalPage] = useState<number>(0);
+    const [totalElement, setTotalElement] = useState<number>(0);
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
@@ -53,6 +54,7 @@ const ProductPage = () => {
             ).then((res) => {
                 setListProduct(res.data);
                 setTotalPage(res.totalPages);
+                setTotalElement(res.limit);
                 setTotal(res.total);
             })
         }
@@ -74,6 +76,8 @@ const ProductPage = () => {
     }
     const onChangePage = async (page: number) => {
         setCurrentPage(page);
+        console.log("page", page);
+
         router.push(`/product?page=${page}`);
         await onSearch(searchText, pageSize, page, minPrice, maxPrice, categoryId).then(_ => { });
     }
@@ -132,6 +136,7 @@ const ProductPage = () => {
                                 currentPage={currentPage}
                                 total={total}
                                 totalPage={totalPage}
+                                totalElement={totalElement}
                                 onChangePage={onChangePage} />
                         </div>
                     </div>

@@ -25,7 +25,7 @@ const TopInformation = (props: Props) => {
             <div className="ps-product__meta">
                 <p>
                     <Link href={`/product?category_id=${product.category_id}`}>
-                        <a className="ml-2 text-capitalize">{product.category_name}</a>
+                        <a className="ml-2 text-capitalize">{product.brand_name}</a>
                     </Link>
                 </p>
                 <div className="ps-product__rating">

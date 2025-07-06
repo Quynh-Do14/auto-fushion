@@ -8,11 +8,12 @@ type Props = {
     loading: boolean,
     totalPage: number,
     currentPage: number
+    totalElement: number
     total: number
     onChangePage: () => void
 }
 const BlogGridItems = (props: Props) => {
-    const { listBlog, columns, loading, totalPage, currentPage, total, onChangePage } = props;
+    const { listBlog, columns, loading, totalPage, currentPage, totalElement, total, onChangePage } = props;
 
     let postItemsView;
     if (!loading && listBlog) {
@@ -45,6 +46,7 @@ const BlogGridItems = (props: Props) => {
                 currentPage={currentPage}
                 total={total}
                 totalPage={totalPage}
+                totalElement={totalElement}
                 onChangePage={onChangePage}
             />
         </div>

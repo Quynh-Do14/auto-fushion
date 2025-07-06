@@ -25,7 +25,7 @@ interface ProductPayload {
   name: string;
   price: number;
   sale_price?: number;
-  images?: string[];
+  image?: string;
   badges?: Badge[];
   badge?: Badge[];
   brands?: Brand[];
@@ -35,13 +35,12 @@ interface ProductPayload {
 export default function useProduct() {
   return {
     thumbnailImage: (payload: ProductPayload): JSX.Element => {
-
-      if (payload?.images?.length) {
+      if (payload?.image) {
         return (
           <LazyLoad>
             <img
               className="product-image"
-              src={configImageURL(payload.images[0])}
+              src={configImageURL(payload.image)}
               alt={payload.name}
             />
           </LazyLoad>

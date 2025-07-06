@@ -70,3 +70,7 @@
   height: 160px;
   object-fit: cover;
 }
+
+.ant-upload.ant-upload-select {
+  width: 100% !important;
+}

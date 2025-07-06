@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
+
 type Props = {
   isLoggedIn: boolean
+  openModalLogout: () => void
 }
 const AccountQuickLinks = (props: Props) => {
-  const { isLoggedIn } = props
-  const handleLogout = () => {
-  }
-
+  const { isLoggedIn, openModalLogout } = props
 
   if (isLoggedIn === true) {
     return (
@@ -16,9 +15,9 @@ const AccountQuickLinks = (props: Props) => {
         <div className='ps-block__content'>
           <ul className='ps-list--arrow'>
             <li className='ps-block__footer'>
-              <a href='#' onClick={handleLogout}>
-                Logout
-              </a>
+              <div onClick={openModalLogout}>
+                Đăng xuất
+              </div>
             </li>
           </ul>
         </div>
@@ -38,6 +37,7 @@ const AccountQuickLinks = (props: Props) => {
             <a>Đăng kí</a>
           </Link>
         </div>
+
       </div>
     )
   }

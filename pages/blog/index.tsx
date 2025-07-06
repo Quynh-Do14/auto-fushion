@@ -25,6 +25,7 @@ const BlogPage = () => {
     const [totalPage, setTotalPage] = useState<number>(0);
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalElement, setTotalElement] = useState<number>(0);
     const [pageSize, setPageSize] = useState<number>(10);
     const [loading, setLoading] = useState<boolean>(false);
     const [categoryId, setCategoryId] = useState<string>("");
@@ -46,6 +47,7 @@ const BlogPage = () => {
                 setLoading
             ).then((res) => {
                 setListBlog(res.data);
+                setTotalElement(res.limit);
                 setTotalPage(res.totalPages);
                 setTotal(res.total);
             })
@@ -103,6 +105,7 @@ const BlogPage = () => {
                                 loading={loading}
                                 totalPage={totalPage}
                                 currentPage={currentPage}
+                                totalElement={totalElement}
                                 total={total}
                                 onChangePage={() => onChangePage}
                             />

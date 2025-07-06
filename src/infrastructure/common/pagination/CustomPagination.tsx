@@ -4,11 +4,12 @@ interface Props {
     currentPage: number;
     total: number;
     totalPage: number;
+    totalElement: number
     onChangePage: (page: number) => void;
 }
 
-const CustomPagination = ({ currentPage, total, totalPage, onChangePage }: Props) => {
-    const isLastPage = currentPage * total >= totalPage;
+const CustomPagination = ({ currentPage, total, totalElement, totalPage, onChangePage }: Props) => {
+    const isLastPage = currentPage * totalElement >= total;
 
 
     const handleClickPage = (page: number) => {
@@ -53,13 +54,13 @@ const CustomPagination = ({ currentPage, total, totalPage, onChangePage }: Props
                     currentPage !== 1
                 }
                 <li>
-                    <a href="#" onClick={(e) => handlePreviousPage(e)}>
+                    <a onClick={(e) => handlePreviousPage(e)}>
                         <i className="icon-chevron-left"></i> Trước
                     </a>
                 </li>
                 {renderPageNumbers()}
                 <li>
-                    <a href="#" onClick={(e) => handleNextPage(e)}>
+                    <a onClick={(e) => handleNextPage(e)}>
                         Sau <i className="icon-chevron-right"></i>
                     </a>
                 </li>

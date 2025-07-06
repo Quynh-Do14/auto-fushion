@@ -1,21 +1,23 @@
-import React, { useEffect } from 'react'
-import HeaderDefault from './Header';
-import FooterWidgets from './Footer';
-import HeaderMobile from './HeaderMobile';
-import MasterLayout from './MasterLayout';
-import categoryProductService from '@/infrastructure/repository/category/categoryProduct.service';
-import { useRecoilState } from 'recoil';
-import { CategoryBlogState, CategoryProductState } from '@/core/atoms/category/categoryState';
-import categoryBlogService from '@/infrastructure/repository/category/categoryBlog.service';
+import styles from "@/asset/css/admin/layout.module.css";
 import { BrandState } from '@/core/atoms/brand/brandState';
+import { CategoryBlogState, CategoryProductState } from '@/core/atoms/category/categoryState';
 import brandService from '@/infrastructure/repository/brand/brand.service';
-
+import categoryBlogService from '@/infrastructure/repository/category/categoryBlog.service';
+import categoryProductService from '@/infrastructure/repository/category/categoryProduct.service';
+import React, { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil';
+import Sidebar from "./Sider";
+import Header from "./Header";
 type Props = {
+    breadcrumb: string
+    title: string
+    redirect: string
     component: any
 }
 
-const MainLayoutComponent = (props: Props) => {
-    const { component } = props;
+const AdminLayoutComponent = (props: Props) => {
+    const { breadcrumb, title, redirect, component } = props
+    const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [, setCategoryProductState] = useRecoilState(CategoryProductState);
     const [, setCategoryBlogState] = useRecoilState(CategoryBlogState);
     const [, setBrandState] = useRecoilState(BrandState);
@@ -51,6 +53,7 @@ const MainLayoutComponent = (props: Props) => {
             console.error(error)
         }
     }
+
     const onGetListBrandAsync = async () => {
         try {
             await brandService.GetBrand(
@@ -66,22 +69,26 @@ const MainLayoutComponent = (props: Props) => {
             console.error(error)
         }
     }
-
     useEffect(() => {
         onGetListCategoryAsync().then(_ => { });
         onGetListBlogCategoryAsync().then(_ => { });
         onGetListBrandAsync().then(_ => { });
     }, []);
+
     return (
-        <>
-            <MasterLayout>
-                <HeaderDefault />
-                <HeaderMobile />
-                {component.children}
-                <FooterWidgets />
-            </MasterLayout>
-        </>
+        <div className={styles.wrapper}>
+            <Sidebar isOpen={isSidebarOpen} />
+            <div className={`${styles.mainContent} ${!isSidebarOpen ? styles.full : ''}`}>
+                <Header
+                    onToggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
+                    breadcrumb={breadcrumb}
+                    title={title}
+                    redirect={redirect}
+                />
+                <div className={styles.pageContent}>{component.children}</div>
+            </div>
+        </div>
     )
 }
 
-export default MainLayoutComponent
+export default AdminLayoutComponent

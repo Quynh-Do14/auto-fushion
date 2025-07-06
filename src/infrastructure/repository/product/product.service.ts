@@ -47,7 +47,7 @@ class ProductService {
         setLoading(true)
         try {
             return await RequestService
-                .post(Endpoint.Product.Add,
+                .postForm(Endpoint.Product.Add,
                     data
                 )
                 .then(response => {
@@ -70,7 +70,7 @@ class ProductService {
         setLoading(true)
         try {
             return await RequestService
-                .put(`${Endpoint.Product.Update}/${id}`,
+                .putForm(`${Endpoint.Product.Update}/${id}`,
                     data
                 )
                 .then(response => {

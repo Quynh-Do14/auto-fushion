@@ -23,7 +23,7 @@ const WidgetProductFilterByPriceRange = (props: Props) => {
     return (
         <aside className="widget widget_shop">
             <figure>
-                <h4 className="widget-title">By Price</h4>
+                <h4 className="widget-title">Lọc giá</h4>
                 <Slider
                     range
                     defaultValue={[0, 200000000]}

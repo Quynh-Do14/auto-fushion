@@ -34,7 +34,7 @@ const WidgetProductFilterCategories = (props: Props) => {
 
     return (
         <aside className="widget widget_shop">
-            <h4 className="widget-title">Categories</h4>
+            <h4 className="widget-title">Danh mục</h4>
             {categoriesView}
         </aside>
     );

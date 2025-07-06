@@ -6,11 +6,15 @@ import { useRecoilState } from "recoil";
 import { CategoryBlogState, CategoryProductState } from "@/core/atoms/category/categoryState";
 import categoryBlogService from "@/infrastructure/repository/category/categoryBlog.service";
 import categoryProductService from "@/infrastructure/repository/category/categoryProduct.service";
+import brandService from "@/infrastructure/repository/brand/brand.service";
+import { BrandState } from "@/core/atoms/brand/brandState";
+import Head from "next/head";
 
 export default function AdminLayout({ breadcrumb, title, redirect, children }: any) {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [, setCategoryProductState] = useRecoilState(CategoryProductState);
     const [, setCategoryBlogState] = useRecoilState(CategoryBlogState);
+    const [, setBrandState] = useRecoilState(BrandState);
 
     const onGetListCategoryAsync = async () => {
         try {
@@ -44,13 +48,57 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
         }
     }
 
+    const onGetListBrandAsync = async () => {
+        try {
+            await brandService.GetBrand(
+                {},
+                () => { }
+            ).then((res) => {
+                setBrandState({
+                    data: res.data
+                })
+            })
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
     useEffect(() => {
         onGetListCategoryAsync().then(_ => { });
         onGetListBlogCategoryAsync().then(_ => { });
+        onGetListBrandAsync().then(_ => { });
     }, []);
+
+    const defaultTitle = process.env.title || 'Auto Fusion';
+    const defaultDescription = process.env.titleDescription || 'Welcome to Auto Fusion';
+    const defaultImage = process.env.defaultImage || '/static/images/og-image.jpg';
+    const defaultUrl = process.env.defaultUrl || 'https://example.com';
 
     return (
         <div className={styles.wrapper}>
+            <Head>
+                <title>{defaultTitle}</title>
+                <meta name="description" content={defaultDescription} />
+                <meta name="robots" content="index, follow" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={defaultUrl} />
+                <meta property="og:title" content={defaultTitle} />
+                <meta property="og:description" content={defaultDescription} />
+                <meta property="og:image" content={defaultImage} />
+
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:url" content={defaultUrl} />
+                <meta name="twitter:title" content={defaultTitle} />
+                <meta name="twitter:description" content={defaultDescription} />
+                <meta name="twitter:image" content={defaultImage} />
+
+                {/* Favicon */}
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Sidebar isOpen={isSidebarOpen} />
             <div className={`${styles.mainContent} ${!isSidebarOpen ? styles.full : ''}`}>
                 <Header

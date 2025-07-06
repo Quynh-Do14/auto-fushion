@@ -6,11 +6,12 @@ import router from 'next/router';
 import Link from 'next/link';
 import authService from '@/infrastructure/repository/auth/auth.service';
 import { ROUTE_PATH } from '@/core/common/appRouter';
+import { FullPageLoading } from '@/infrastructure/common/loader/loading';
 
 const LoginPage = () => {
     const breadCrumb = [
         {
-            text: 'Tràng chủ',
+            text: 'Trang chủ',
             url: '/',
         },
         {
@@ -20,7 +21,6 @@ const LoginPage = () => {
     const [loading, setLoading] = useState<boolean>(false)
 
     const handleLoginSubmit = async (values: any) => {
-        console.log("values", values);
 
         try {
             const response = await authService.login(
@@ -71,13 +71,13 @@ const LoginPage = () => {
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Please input your email!',
+                                                    message: 'Vui lòng nhập Email!',
                                                 },
                                             ]}>
                                             <Input
                                                 className="form-control"
                                                 type="email"
-                                                placeholder="Username or email address"
+                                                placeholder="Email"
                                             />
                                         </Form.Item>
                                     </div>
@@ -87,13 +87,13 @@ const LoginPage = () => {
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Please input your password!',
+                                                    message: 'Vui lòng nhập mật khẩu!',
                                                 },
                                             ]}>
                                             <Input
                                                 className="form-control"
                                                 type="password"
-                                                placeholder="Password..."
+                                                placeholder="Mật khẩu..."
                                             />
                                         </Form.Item>
                                     </div>
@@ -111,6 +111,7 @@ const LoginPage = () => {
                     </div>
                 </div>
             </div>
+            <FullPageLoading isLoading={loading} />
         </MainLayoutPublic>
     )
 }
