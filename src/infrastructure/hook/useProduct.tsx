@@ -4,6 +4,7 @@ import Link from 'next/link';
 import NotFoundImg from '@/asset/img/not-found.jpg'
 import { configImageURL, convertSlug, formatCurrency } from '../helper/helper';
 import { ROUTE_PATH } from '@/core/common/appRouter';
+import Image from 'next/image';
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
 
 interface ImageFormat {
@@ -38,7 +39,10 @@ export default function useProduct() {
       if (payload?.image) {
         return (
           <LazyLoad>
-            <img
+            <Image
+              width={400}
+              height={250}
+              style={{ objectFit: 'cover', width: '100%', height: '150px' }}
               className="product-image"
               src={configImageURL(payload.image)}
               alt={payload.name}
@@ -49,7 +53,12 @@ export default function useProduct() {
       else {
         return (
           <LazyLoad>
-            <img className="product-image" src={NotFoundImg.src} alt={payload.name} />
+            <Image width={400}
+              height={250}
+              style={{ objectFit: 'cover', width: '100%', height: '150px' }}
+              className="product-image"
+              src={NotFoundImg}
+              alt={payload.name} />
           </LazyLoad>
         )
       }
@@ -145,7 +154,7 @@ export default function useProduct() {
     name: (payload: ProductPayload): JSX.Element => {
       return (
         <Link href={`${ROUTE_PATH.PRODUCT}/${convertSlug(payload.name)}-${payload.id}.html`}>
-          <a className="ps-product__name">{payload.name}</a>
+          <a className="ps-product__name text-truncate-2">{payload.name}</a>
         </Link>
       );
     }

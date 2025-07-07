@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import categoryProductService from '@/infrastructure/repository/category/categoryProduct.service';
 import { configImageURL } from '@/infrastructure/helper/helper';
+import Image from 'next/image';
 
 
 
@@ -48,12 +49,18 @@ const ListCategories = () => {
                         <Link href={`/product?category_id=${category.id}`}>
                             <div className="ps-block--category-2" data-mh="categories">
                                 <div className="ps-block__thumbnail">
-                                    <img src={configImageURL(category.image)} alt="martfury" />
+                                    <Image
+                                        width={200}
+                                        height={200}
+                                        style={{ objectFit: 'cover', width: '100%', height: '200px' }}
+                                        src={configImageURL(category.image)}
+                                        alt={category.name}
+                                    />
                                 </div>
 
                                 <div className="ps-block__content">
                                     <h4>{category.name}</h4>
-                                    <ul>
+                                    <ul className='text-truncate-2'>
                                         {category.description &&
                                             <li>{category.description}</li>
                                         }

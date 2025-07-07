@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { CategoryProductState } from '@/core/atoms/category/categoryState';
 import CustomPagination from '@/infrastructure/common/pagination/CustomPagination';
+import { BrandState } from '@/core/atoms/brand/brandState';
 
 const ProductPage = () => {
     const breadCrumb = [
@@ -34,18 +35,21 @@ const ProductPage = () => {
     const [minPrice, setMinPrice] = useState<number>(0);
     const [maxPrice, setMaxPrice] = useState<number>(200000000);
     const [categoryId, setCategoryId] = useState<string>("");
+    const [brandId, setBrandId] = useState<string>("");
     const router = useRouter();
-    const { min_price, max_price, search, page, limit, category_id } = router.query;
+    const { min_price, max_price, search, page, limit, category_id, brand_id } = router.query;
     const productCategoryState = useRecoilValue(CategoryProductState).data;
+    const brandState = useRecoilValue(BrandState).data;
 
-    const onGetListProductAsync = async ({ name = searchText, limit = pageSize, page = currentPage, min = minPrice, max = maxPrice, category_id = categoryId }) => {
+    const onGetListProductAsync = async ({ name = searchText, limit = pageSize, page = currentPage, min = minPrice, max = maxPrice, category_id = categoryId, brand_id = brandId }) => {
         const param = {
             page: page,
             limit: limit,
             search: name,
             min_price: min,
             max_price: max,
-            category_id: category_id
+            category_id: category_id,
+            brand_id: brand_id
         }
         try {
             await productService.GetProduct(
@@ -62,8 +66,8 @@ const ProductPage = () => {
             console.error(error)
         }
     }
-    const onSearch = async (name = searchText, limit = pageSize, page = 1, min = minPrice, max = maxPrice, category_id = categoryId) => {
-        await onGetListProductAsync({ name: name, limit: limit, page: page, min: min, max: max, category_id: category_id }).then(_ => { });
+    const onSearch = async (name = searchText, limit = pageSize, page = 1, min = minPrice, max = maxPrice, category_id = categoryId, brand_id = brandId) => {
+        await onGetListProductAsync({ name: name, limit: limit, page: page, min: min, max: max, category_id: category_id, brand_id: brand_id }).then(_ => { });
     };
 
     const handleChangeRange = async (value: any[]) => {
@@ -72,14 +76,14 @@ const ProductPage = () => {
         setMinPrice(value[0]);
         setMaxPrice(value[1]);
         router.push(`/product?min_price=${value[0]}&max_price=${value[1]}`);
-        await onSearch(searchText, pageSize, currentPage, value[0], value[1], categoryId).then(_ => { });
+        await onSearch(searchText, pageSize, currentPage, value[0], value[1], categoryId, brandId).then(_ => { });
     }
     const onChangePage = async (page: number) => {
         setCurrentPage(page);
         console.log("page", page);
 
         router.push(`/product?page=${page}`);
-        await onSearch(searchText, pageSize, page, minPrice, maxPrice, categoryId).then(_ => { });
+        await onSearch(searchText, pageSize, page, minPrice, maxPrice, categoryId, brandId).then(_ => { });
     }
 
     useEffect(() => {
@@ -89,6 +93,7 @@ const ProductPage = () => {
         const parsedLimit = parseInt(limit as string) || 10;
         const parsedSearch = (search as string) || "";
         const parsedCategory = (category_id as string) || "";
+        const parsedBrand = (brand_id as string) || "";
 
         setMinPrice(parsedMinPrice);
         setMaxPrice(parsedMaxPrice);
@@ -96,8 +101,9 @@ const ProductPage = () => {
         setCurrentPage(parsedPage);
         setPageSize(parsedLimit);
         setCategoryId(parsedCategory);
+        setBrandId(parsedBrand);
 
-        onSearch(parsedSearch, parsedLimit, parsedPage, parsedMinPrice, parsedMaxPrice, parsedCategory);
+        onSearch(parsedSearch, parsedLimit, parsedPage, parsedMinPrice, parsedMaxPrice, parsedCategory, parsedBrand);
     }, [router.query]);
 
     return (
@@ -120,6 +126,12 @@ const ProductPage = () => {
                                 productCategory={productCategoryState}
                                 setCategoryId={setCategoryId}
                                 categoryId={categoryId}
+                                loading={loading}
+                            />
+                            <WidgetProductFilterCategories
+                                productCategory={brandState}
+                                setCategoryId={setBrandId}
+                                categoryId={brandId}
                                 loading={loading}
                             />
                         </div>

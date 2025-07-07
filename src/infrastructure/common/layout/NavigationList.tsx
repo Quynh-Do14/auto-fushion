@@ -72,7 +72,7 @@ const NavigationList: React.FC<NavigationListProps> = () => {
                 open={searchDrawer}>
                 <div className="ps-panel--wrapper">
                     <div className="ps-panel__header">
-                        <h3>Search</h3>
+                        <h3>Tìm kiếm</h3>
                         <span className="ps-panel__close" onClick={handleDrawerClose}>
                             <i className="icon-cross"></i>
                         </span>
@@ -91,7 +91,7 @@ const NavigationList: React.FC<NavigationListProps> = () => {
                 open={categoriesDrawer}>
                 <div className="ps-panel--wrapper">
                     <div className="ps-panel__header">
-                        <h3>Categories</h3>
+                        <h3>Danh mục sản phẩm</h3>
                         <span className="ps-panel__close" onClick={handleDrawerClose}>
                             <i className="icon-cross"></i>
                         </span>
@@ -113,13 +113,13 @@ const NavigationList: React.FC<NavigationListProps> = () => {
                     className={`navigation__item ${categoriesDrawer ? 'active' : ''}`}
                     onClick={handleShowCategoriesDrawer}>
                     <i className="icon-list4"></i>
-                    <span> Categories</span>
+                    <span> Danh mục</span>
                 </a>
                 <a
                     className={`navigation__item ${searchDrawer ? 'active' : ''}`}
                     onClick={handleShowSearchDrawer}>
                     <i className="icon-magnifier"></i>
-                    <span> Search</span>
+                    <span> Tìm kiếm</span>
                 </a>
             </div>
         </div>

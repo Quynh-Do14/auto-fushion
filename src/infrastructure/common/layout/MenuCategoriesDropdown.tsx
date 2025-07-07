@@ -1,21 +1,24 @@
 import React from 'react';
 import Menu from '../menu/Menu';
-import Constants from '@/core/common/constants';
 import { useRecoilValue } from 'recoil';
 import { CategoryProductState } from '@/core/atoms/category/categoryState';
+import { BrandState } from '@/core/atoms/brand/brandState';
 
 const MenuCategoriesDropdown = () => {
     const productCategory = useRecoilValue(CategoryProductState).data
+    const brand = useRecoilValue(BrandState).data
+
     return (
         <div className="menu--product-categories">
             <div className="menu__toggle">
                 <i className="icon-menu"></i>
-                <span>Danh mục sản phẩm</span>
+                <span>Thương hiệu sản phẩm</span>
             </div>
             <div className="menu__content">
                 <Menu
-                    source={Constants.Menu.PublicList}
+                    source={brand}
                     className="menu--dropdown"
+                    brand={true}
                 />
             </div>
         </div>

@@ -8,12 +8,13 @@ type Props = {
 const TopInformation = (props: Props) => {
     const { product } = props;
     let priceView;
+    console.log('product', product);
 
-    if (product.is_sale) {
+    if (product.sale_price) {
         priceView = (
             <h4 className="ps-product__price sale">
-                <del className="mr-2">{formatCurrency(Number(product.sale_price))}</del>đ
-                {formatCurrency(Number(product.price))}đ
+                <del className="mr-2">{formatCurrency(Number(product.price))}</del>đ
+                {formatCurrency(Number(product.sale_price))}đ
             </h4>
         );
     } else {
@@ -24,13 +25,13 @@ const TopInformation = (props: Props) => {
             <h1>{product.name}</h1>
             <div className="ps-product__meta">
                 <p>
-                    <Link href={`/product?category_id=${product.category_id}`}>
-                        <a className="ml-2 text-capitalize">{product.brand_name}</a>
+                    <Link href={`/product?brand_id=${product.brand_id}`}>
+                        <a className="ml-2 text-capitalize">Thương hiệu: {product.brand_name}</a>
                     </Link>
                 </p>
                 <div className="ps-product__rating">
                     <Rating />
-                    <span>(1 review)</span>
+                    {/* <span>(1 review)</span> */}
                 </div>
             </div>
             {priceView}

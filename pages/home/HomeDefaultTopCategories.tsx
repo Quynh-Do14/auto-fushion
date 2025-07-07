@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import categoryProductService from '@/infrastructure/repository/category/categoryProduct.service';
 import { configImageURL } from '@/infrastructure/helper/helper';
+import Image from 'next/image';
 
 const HomeDefaultTopCategories = () => {
     const [listCategory, setListCategory] = useState<Array<any>>([])
@@ -35,13 +36,19 @@ const HomeDefaultTopCategories = () => {
                 <div className="row">
                     {
                         listCategory.map((category) => (
-                            <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
+                            <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6" style={{ marginBottom: 30 }}>
                                 <div className="ps-block--category">
                                     <Link href="/shop">
                                         <a className="ps-block__overlay"></a>
                                     </Link>
-                                    <img src={configImageURL(category.image)} alt="martfury" />
-                                    <p>{category.name}</p>
+                                    <Image
+                                        width={200}
+                                        height={200}
+                                        style={{ objectFit: 'cover', width: '100%', height: '200px' }}
+                                        src={configImageURL(category.image)}
+                                        alt={category.name}
+                                    />
+                                    <p className='text-truncate-2'>{category.name}</p>
                                 </div>
                             </div>
                         ))

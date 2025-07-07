@@ -6,7 +6,8 @@ const Rating = () => (
         <i className="fa fa-star"></i>
         <i className="fa fa-star"></i>
         <i className="fa fa-star"></i>
-        <i className="fa fa-star-o"></i>
+        <i className="fa fa-star"></i>
+        {/* <i className="fa fa-star-o"></i> */}
     </span>
 );
 
