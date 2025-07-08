@@ -12,6 +12,7 @@ import { useRecoilValue } from 'recoil';
 import { CategoryProductState } from '@/core/atoms/category/categoryState';
 import CustomPagination from '@/infrastructure/common/pagination/CustomPagination';
 import { BrandState } from '@/core/atoms/brand/brandState';
+import WidgetProductFilterBrands from '../../components/product/WidgetProductFilterBrand';
 
 const ProductPage = () => {
     const breadCrumb = [
@@ -30,7 +31,7 @@ const ProductPage = () => {
     const [totalElement, setTotalElement] = useState<number>(0);
     const [total, setTotal] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [pageSize, setPageSize] = useState<number>(10);
+    const [pageSize, setPageSize] = useState<number>(12);
     const [loading, setLoading] = useState<boolean>(false);
     const [minPrice, setMinPrice] = useState<number>(0);
     const [maxPrice, setMaxPrice] = useState<number>(200000000);
@@ -128,10 +129,10 @@ const ProductPage = () => {
                                 categoryId={categoryId}
                                 loading={loading}
                             />
-                            <WidgetProductFilterCategories
-                                productCategory={brandState}
-                                setCategoryId={setBrandId}
-                                categoryId={brandId}
+                            <WidgetProductFilterBrands
+                                brand={brandState}
+                                setBrandId={setBrandId}
+                                brandId={brandId}
                                 loading={loading}
                             />
                         </div>

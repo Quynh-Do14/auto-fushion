@@ -9,6 +9,9 @@ import { CategoryBlogState, CategoryProductState } from '@/core/atoms/category/c
 import categoryBlogService from '@/infrastructure/repository/category/categoryBlog.service';
 import { BrandState } from '@/core/atoms/brand/brandState';
 import brandService from '@/infrastructure/repository/brand/brand.service';
+import { ProfileState } from '@/core/atoms/profile/profileState';
+import { isTokenStoraged } from '@/infrastructure/utilities/storage';
+import authService from '@/infrastructure/repository/auth/auth.service';
 
 type Props = {
     component: any
@@ -19,7 +22,8 @@ const MainLayoutComponent = (props: Props) => {
     const [, setCategoryProductState] = useRecoilState(CategoryProductState);
     const [, setCategoryBlogState] = useRecoilState(CategoryBlogState);
     const [, setBrandState] = useRecoilState(BrandState);
-
+    const [, setProfileState] = useRecoilState(ProfileState);
+    const token = isTokenStoraged();
     const onGetListCategoryAsync = async () => {
         try {
             await categoryProductService.GetCategory(
@@ -67,11 +71,33 @@ const MainLayoutComponent = (props: Props) => {
         }
     }
 
+    const onGetProfileAsync = async () => {
+        if (token) {
+        } try {
+            await authService.profile(
+                () => { }
+            ).then((res) => {
+                setProfileState({
+                    data: res
+                })
+            })
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }
+
     useEffect(() => {
         onGetListCategoryAsync().then(_ => { });
         onGetListBlogCategoryAsync().then(_ => { });
         onGetListBrandAsync().then(_ => { });
     }, []);
+
+    useEffect(() => {
+        if (token) {
+            onGetProfileAsync().then(_ => { });
+        }
+    }, [token]);
     return (
         <>
             <MasterLayout>

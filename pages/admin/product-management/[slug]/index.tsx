@@ -97,7 +97,7 @@ const SlugProductManagement = () => {
                 category_id: detail.category_id,
                 brand_id: detail.brand_id,
                 price: detail.price,
-                sale_price: detail.sale_price,
+                percent_sale: detail.percent_sale,
                 warranty: detail.warranty,
                 year: detail.year,
                 short_description: detail.short_description,
@@ -145,7 +145,7 @@ const SlugProductManagement = () => {
             formData.append('category_id', dataRequest.category_id);
             formData.append('brand_id', dataRequest.brand_id);
             formData.append('price', dataRequest.price);
-            formData.append('sale_price', dataRequest.sale_price);
+            formData.append('percent_sale', dataRequest.percent_sale);
             formData.append('warranty', dataRequest.warranty);
             formData.append('year', dataRequest.year);
             formData.append('short_description', dataRequest.short_description);
@@ -280,15 +280,17 @@ const SlugProductManagement = () => {
                                 </Col>
                                 <Col xs={24} sm={24} md={12}>
                                     <InputNumberCommon
-                                        label={"Giá khuyến mại"}
-                                        attribute={"sale_price"}
+                                        label={"Giảm giá (%)"}
+                                        attribute={"percent_sale"}
                                         isRequired={true}
-                                        dataAttribute={dataRequest.sale_price}
+                                        dataAttribute={dataRequest.percent_sale}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
+                                        max={100}
+                                        min={0}
                                     />
                                 </Col>
                                 <Col xs={24} sm={24} md={12}>
@@ -306,7 +308,7 @@ const SlugProductManagement = () => {
                                 </Col>
                                 <Col xs={24} sm={24} md={12}>
                                     <InputTextCommon
-                                        label={"Năm"}
+                                        label={"Năm bảo hành"}
                                         attribute={"year"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.year}

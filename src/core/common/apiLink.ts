@@ -2,7 +2,7 @@ export class Endpoint {
     static Auth = class {
         static Login = "/auth/login"
         static Register = "auth/register"
-        static Profile = "/users/profile/detail"
+        static Profile = "/users/me/profile"
         static RefreshToken = "/auth/refresh-token"
     }
     static Product = class {

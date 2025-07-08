@@ -1,10 +1,10 @@
-import { carouselFullwidth, carouselStandard } from '@/infrastructure/utilities/carousel-helpers';
+import { carouselFullwidth, carouselStandard, carouselInSidebar, carouselSingle } from '@/infrastructure/utilities/carousel-helpers';
 import React from 'react';
 import Slider from 'react-slick';
 import Product from './Product';
 type Props = {
     products: any[]
-    type: string
+    type: "fullwidth" | "carouselInSidebar" | "carouselStandard" | "carouselSingle"
 }
 export const ProductGroupWithCarousel = (props: Props) => {
     const { products, type } = props;
@@ -22,10 +22,39 @@ export const ProductGroupWithCarousel = (props: Props) => {
                 ))}
             </Slider>
         );
-    } else {
+    }
+    else if (type === 'carouselInSidebar') {
+        return (
+            <Slider
+                {...carouselInSidebar}
+                infinite={products.length > 5 ? true : false}
+                className='ps-carousel outside'>
+                {products.map((item) => (
+                    <div className='ps-carousel-item' key={item.id}>
+                        <Product product={item} />
+                    </div>
+                ))}
+            </Slider>
+        );
+    }
+    else if (type === 'carouselStandard') {
         return (
             <Slider
                 {...carouselStandard}
+                infinite={products.length > 5 ? true : false}
+                className='ps-carousel outside'>
+                {products.map((item) => (
+                    <div className='ps-carousel-item' key={item.id}>
+                        <Product product={item} />
+                    </div>
+                ))}
+            </Slider>
+        );
+    }
+    else if (type === 'carouselSingle') {
+        return (
+            <Slider
+                {...carouselSingle}
                 infinite={products.length > 5 ? true : false}
                 className='ps-carousel outside'>
                 {products.map((item) => (

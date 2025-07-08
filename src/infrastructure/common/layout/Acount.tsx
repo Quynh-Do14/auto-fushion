@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { useRecoilValue } from 'recoil'
+import { ProfileState } from '@/core/atoms/profile/profileState'
 
 type Props = {
   isLoggedIn: boolean
@@ -7,11 +9,12 @@ type Props = {
 }
 const AccountQuickLinks = (props: Props) => {
   const { isLoggedIn, openModalLogout } = props
-
+  const profile = useRecoilValue(ProfileState).data;
   if (isLoggedIn === true) {
     return (
       <div className='ps-block--user-account'>
         <i className='icon-user'></i>
+        {profile?.name}
         <div className='ps-block__content'>
           <ul className='ps-list--arrow'>
             <li className='ps-block__footer'>

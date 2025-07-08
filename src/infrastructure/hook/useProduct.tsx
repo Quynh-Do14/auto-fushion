@@ -25,7 +25,7 @@ interface ProductPayload {
   id: number | string;
   name: string;
   price: number;
-  sale_price?: number;
+  percent_sale: number;
   image?: string;
   badges?: Badge[];
   badge?: Badge[];
@@ -65,11 +65,12 @@ export default function useProduct() {
     },
 
     price: (payload: ProductPayload): JSX.Element => {
-      if (payload.sale_price) {
+      if (Number(payload.percent_sale) > 0) {
+        const remain_price = payload.price - (payload.price * payload.percent_sale) / 100;
         return (
           <p className="ps-product__price sale">
             <span>₫</span>
-            {formatCurrency(Number(payload.sale_price))}
+            {formatCurrency(Number(remain_price))}
             <br />
             <del className="ml-2">
               <span>₫</span>
@@ -119,15 +120,11 @@ export default function useProduct() {
     },
 
     badge: (payload: ProductPayload): JSX.Element | undefined => {
-      if (payload.sale_price) {
-        const discountPercent = (
-          ((payload.price - payload.sale_price) / payload.price) * 100
-        ).toFixed(0);
+      if (Number(payload.percent_sale) > 0) {
         return (
-          <div className="ps-product__badge">-{discountPercent}%</div>
+          <div className="ps-product__badge">-{Number(payload.percent_sale).toFixed(0)}%</div>
         );
       }
-
       if (payload.badge && payload.badge.length > 0) {
         return (
           <>
@@ -148,7 +145,7 @@ export default function useProduct() {
         );
       }
 
-      return undefined;
+      return;
     },
 
     name: (payload: ProductPayload): JSX.Element => {

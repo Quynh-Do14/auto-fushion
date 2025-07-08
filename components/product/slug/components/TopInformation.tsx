@@ -10,11 +10,11 @@ const TopInformation = (props: Props) => {
     let priceView;
     console.log('product', product);
 
-    if (product.sale_price) {
+    if (product.percent_sale) {
         priceView = (
             <h4 className="ps-product__price sale">
                 <del className="mr-2">{formatCurrency(Number(product.price))}</del>đ
-                {formatCurrency(Number(product.sale_price))}đ
+                {formatCurrency(Number(product.percent_sale))}đ
             </h4>
         );
     } else {

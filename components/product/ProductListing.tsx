@@ -3,6 +3,7 @@ import Link from 'next/link';
 import SkeletonProduct from '@/infrastructure/common/skeleton/SkeletonProduct';
 import { generateTempArray } from '@/infrastructure/utilities/common-helpers';
 import { ProductGroupWithCarousel } from '@/infrastructure/common/product/ProductGroupWithCarousel';
+import ProductGroupGridItems from '@/infrastructure/common/product/ProductGroupGridItems';
 
 type Props = {
     title: string
@@ -27,9 +28,11 @@ const ProductListing = (props: Props) => {
     if (!loading) {
         if (listProduct && listProduct.length > 0) {
             productItemsView = (
-                <ProductGroupWithCarousel
+                <ProductGroupGridItems
                     products={listProduct}
-                    type="fullwidth"
+                    columns={4}
+                    pageSize={pageSize}
+                    loading={loading}
                 />
             );
         } else {

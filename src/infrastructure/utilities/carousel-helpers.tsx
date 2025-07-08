@@ -88,8 +88,8 @@ export const carouselFullwidth = {
     dots: false,
     infinite: true,
     speed: 750,
-    slidesToShow: 6,
-    slidesToScroll: 3,
+    slidesToShow: 5,
+    slidesToScroll: 1,
     arrows: true,
     nextArrow: <NextArrow className={''} onClick={function (): void {
         throw new Error('Function not implemented.');

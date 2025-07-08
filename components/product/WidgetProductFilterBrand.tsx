@@ -8,7 +8,7 @@ type Props = {
     brandId: string
     loading: boolean
 }
-const WidgetProductFilterCategories = (props: Props) => {
+const WidgetProductFilterBrands = (props: Props) => {
     const { brand, setBrandId, brandId, loading } = props;
 
     const onSelectCategory = (item: any) => {
@@ -22,7 +22,7 @@ const WidgetProductFilterCategories = (props: Props) => {
                     onClick={() => onSelectCategory(item)}
                     key={item.id}
                     className={String(item.id) === brandId ? 'active' : ''}>
-                    <Link href={`/product?category_id=${item.id}`}>{item.name}</Link>
+                    <Link href={`/product?brand_id=${item.id}`}>{item.name}</Link>
                 </li>
             ));
             categoriesView =
@@ -40,10 +40,10 @@ const WidgetProductFilterCategories = (props: Props) => {
 
     return (
         <aside className="widget widget_shop">
-            <h4 className="widget-title">Danh mục</h4>
+            <h4 className="widget-title">Thương hiệu</h4>
             {categoriesView}
         </aside>
     );
 };
 
-export default WidgetProductFilterCategories;
+export default WidgetProductFilterBrands;

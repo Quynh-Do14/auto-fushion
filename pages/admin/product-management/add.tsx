@@ -78,7 +78,7 @@ const AddProductManagement = () => {
             formData.append('category_id', dataRequest.category_id);
             formData.append('brand_id', dataRequest.brand_id);
             formData.append('price', dataRequest.price);
-            formData.append('sale_price', dataRequest.sale_price);
+            formData.append('percent_sale', dataRequest.percent_sale);
             formData.append('warranty', dataRequest.warranty);
             formData.append('short_description', dataRequest.short_description);
             formData.append('more_infomation', dataRequest.more_infomation);
@@ -205,15 +205,17 @@ const AddProductManagement = () => {
                                 </Col>
                                 <Col xs={24} sm={24} md={12}>
                                     <InputNumberCommon
-                                        label={"Giá khuyến mại"}
-                                        attribute={"sale_price"}
+                                        label={"Giảm giá (%)"}
+                                        attribute={"percent_sale"}
                                         isRequired={true}
-                                        dataAttribute={dataRequest.sale_price}
+                                        dataAttribute={dataRequest.percent_sale}
                                         setData={setDataRequest}
                                         disabled={false}
                                         validate={validate}
                                         setValidate={setValidate}
                                         submittedTime={submittedTime}
+                                        max={100}
+                                        min={0}
                                     />
                                 </Col>
                                 <Col xs={24} sm={24} md={12}>
@@ -231,7 +233,7 @@ const AddProductManagement = () => {
                                 </Col>
                                 <Col xs={24} sm={24} md={12}>
                                     <InputTextCommon
-                                        label={"Năm"}
+                                        label={"Năm bảo hành"}
                                         attribute={"year"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.year}

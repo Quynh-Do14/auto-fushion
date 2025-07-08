@@ -25,7 +25,7 @@ const Product = (props: Props) => {
                     {name(product)}
                     <div className="ps-product__rating">
                         <Rating />
-                        <span>02</span>
+                        {/* <span>02</span> */}
                     </div>
                     {price(product)}
                 </div>
