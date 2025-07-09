@@ -20,8 +20,6 @@ const HeaderDefault = () => {
     const token = isTokenStoraged()
     const [isOpenModalLogout, setIsOpenModalLogout] = useState<boolean>(false)
     const openModalLogout = () => {
-        console.log("div click");
-
         setIsOpenModalLogout(true);
     };
 

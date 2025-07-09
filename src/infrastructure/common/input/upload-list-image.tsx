@@ -85,8 +85,6 @@ function UploadListImage(props: Props) {
             setData({ ["imagesCode"]: filterArrayImageFileCodes });
         }
     }
-    console.log("listImg", listImg);
-    console.log("dataAttribute", dataAttribute);
 
     return (
         <div className={styles.upload_common}>

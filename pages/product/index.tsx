@@ -72,7 +72,6 @@ const ProductPage = () => {
     };
 
     const handleChangeRange = async (value: any[]) => {
-        console.log("value", value);
 
         setMinPrice(value[0]);
         setMaxPrice(value[1]);
@@ -81,7 +80,6 @@ const ProductPage = () => {
     }
     const onChangePage = async (page: number) => {
         setCurrentPage(page);
-        console.log("page", page);
 
         router.push(`/product?page=${page}`);
         await onSearch(searchText, pageSize, page, minPrice, maxPrice, categoryId, brandId).then(_ => { });

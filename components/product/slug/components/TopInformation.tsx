@@ -8,7 +8,6 @@ type Props = {
 const TopInformation = (props: Props) => {
     const { product } = props;
     let priceView;
-    console.log('product', product);
 
     if (product.percent_sale) {
         priceView = (

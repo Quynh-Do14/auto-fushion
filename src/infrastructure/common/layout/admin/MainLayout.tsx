@@ -9,6 +9,7 @@ import categoryProductService from "@/infrastructure/repository/category/categor
 import brandService from "@/infrastructure/repository/brand/brand.service";
 import { BrandState } from "@/core/atoms/brand/brandState";
 import Head from "next/head";
+import { configImageURL } from "@/infrastructure/helper/helper";
 
 export default function AdminLayout({ breadcrumb, title, redirect, children }: any) {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
@@ -69,10 +70,10 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
         onGetListBrandAsync().then(_ => { });
     }, []);
 
-    const defaultTitle = process.env.title || 'Auto Fusion';
-    const defaultDescription = process.env.titleDescription || 'Welcome to Auto Fusion';
-    const defaultImage = process.env.defaultImage || '/static/images/og-image.jpg';
-    const defaultUrl = process.env.defaultUrl || 'https://example.com';
+    const defaultTitle = 'Auto Fusion';
+    const defaultDescription = "Auto Fusion - Website chuyên cung cấp sản phẩm, phụ tùng và dịch vụ ô tô chính hãng. Uy tín - Chuyên nghiệp - Giá tốt.";
+    const defaultImage = configImageURL('/uploads/thumbnail.png');
+    const defaultUrl = process.env.NEXT_PUBLIC_PUBLIC_URL || 'https://autofusion.vn';
 
     return (
         <div className={styles.wrapper}>

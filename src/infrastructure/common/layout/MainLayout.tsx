@@ -20,7 +20,7 @@ const MainLayoutPublic = ({
 }: MainLayoutPublicProps) => {
     const defaultTitle = 'Auto Fusion';
     const defaultDescription = "Auto Fusion - Website chuyên cung cấp sản phẩm, phụ tùng và dịch vụ ô tô chính hãng. Uy tín - Chuyên nghiệp - Giá tốt.";
-    const defaultImage = configImageURL('thumbnail.png');
+    const defaultImage = configImageURL('/uploads/thumbnail.png');
     const defaultUrl = process.env.NEXT_PUBLIC_PUBLIC_URL || 'https://autofusion.vn';
 
     const titleView = title ? `${title} | ${defaultTitle}` : `${defaultDescription} | ${defaultTitle}`;
