@@ -5,6 +5,7 @@ import HomeDefaultProductListing from './home/HomeDefaultProductListing'
 import HomeDefaultTopCategories from './home/HomeDefaultTopCategories'
 import MainLayoutPublic from '@/infrastructure/common/layout/MainLayout'
 import BreadCrumb from '@/infrastructure/common/breadcrumb/BreadCrumb'
+import HomeDefaultBrand from './home/HomeDefaultBrand'
 
 const Home: NextPage = () => {
   const breadCrumb = [
@@ -21,8 +22,9 @@ const Home: NextPage = () => {
       <MainLayoutPublic>
         <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
         <HomeDefaultBanner />
-        <HomeAdsColumns />
+        {/* <HomeAdsColumns /> */}
         <HomeDefaultTopCategories />
+        <HomeDefaultBrand />
         <HomeDefaultProductListing
           title="Sản phẩm nổi bật"
         />

@@ -10,6 +10,7 @@ const SearchHeader = () => {
     const inputEl = useRef(null);
     const [isSearch, setIsSearch] = useState(false);
     const [keyword, setKeyword] = useState('');
+    const [categoryId, setCategoryId] = useState('');
     const [resultItems, setResultItems] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
     const productCategory = useRecoilValue(CategoryProductState).data
@@ -22,7 +23,7 @@ const SearchHeader = () => {
 
     function handleSubmit(e: any) {
         e.preventDefault();
-        Router.push(`/search?keyword=${keyword}`);
+        Router.push(`/search?keyword=${keyword}&category_id=${categoryId}`);
     }
 
     // Views
@@ -76,7 +77,7 @@ const SearchHeader = () => {
             action="/"
             onSubmit={handleSubmit}>
             <div className="ps-form__categories">
-                <select className="form-control">
+                <select className="form-control" onChange={(e) => setCategoryId(e.target.value)}>
                     <option value={""}>
                         Tất cả
                     </option>

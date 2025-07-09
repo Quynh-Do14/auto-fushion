@@ -2,6 +2,7 @@ import { carouselFullwidth, carouselStandard, carouselInSidebar, carouselSingle 
 import React from 'react';
 import Slider from 'react-slick';
 import Product from './Product';
+import ProductSimple from './ProductSimple';
 type Props = {
     products: any[]
     type: "fullwidth" | "carouselInSidebar" | "carouselStandard" | "carouselSingle"
@@ -17,7 +18,7 @@ export const ProductGroupWithCarousel = (props: Props) => {
                 className='ps-carousel outside'>
                 {products.map((item) => (
                     <div className='ps-carousel-item' key={item.id}>
-                        <Product product={item} />
+                        <ProductSimple product={item} />
                     </div>
                 ))}
             </Slider>

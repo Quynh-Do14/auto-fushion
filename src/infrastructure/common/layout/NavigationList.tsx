@@ -3,6 +3,7 @@ import { Drawer } from 'antd';
 import PanelCategories from './panel/PanelCategories';
 import PanelSearch from './panel/PanelSearch';
 import PanelMenu from './panel/PanelMenu';
+import avatar from '@/asset/img/avatar.png'
 
 interface NavigationListProps {
     // Thêm props từ mapStateToProps nếu cần
@@ -120,6 +121,13 @@ const NavigationList: React.FC<NavigationListProps> = () => {
                     onClick={handleShowSearchDrawer}>
                     <i className="icon-magnifier"></i>
                     <span> Tìm kiếm</span>
+                </a>
+                <a
+                    className={`navigation__item ${searchDrawer ? 'active' : ''}`}
+                    onClick={() => { }}>
+                    <span>
+                        <img src={avatar.src} alt="avatar" className="user-avatar" />
+                    </span>
                 </a>
             </div>
         </div>

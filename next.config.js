@@ -24,6 +24,11 @@ const nextConfig = {
         hostname: '103.130.215.248',
         port: '43216',
         pathname: '/api/uploads/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.autofusion.vn',
+        pathname: '/api/uploads/**'
       }
     ]
   },

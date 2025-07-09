@@ -31,7 +31,7 @@ const ProductGroupGridItems = (props: Props) => {
             });
             productItemsView = <div className="row">{items}</div>;
         } else {
-            productItemsView = <p>No product(s) found.</p>;
+            productItemsView = <p>Không tìm thấy sản phẩm.</p>;
         }
     } else {
         const skeletonItems = generateTempArray(columns * 2).map((item) => (

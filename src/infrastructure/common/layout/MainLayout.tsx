@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import MainLayoutComponent from './MainLayoutComponent';
+import { configImageURL } from '@/infrastructure/helper/helper';
 
 interface MainLayoutPublicProps {
     title?: string;
@@ -17,10 +18,10 @@ const MainLayoutPublic = ({
     url,
     ...props
 }: MainLayoutPublicProps) => {
-    const defaultTitle = process.env.title || 'Auto Fusion';
-    const defaultDescription = process.env.titleDescription || 'Welcome to Auto Fusion';
-    const defaultImage = process.env.defaultImage || '/static/images/og-image.jpg';
-    const defaultUrl = process.env.defaultUrl || 'https://example.com';
+    const defaultTitle = 'Auto Fusion';
+    const defaultDescription = "Auto Fusion - Website chuyên cung cấp sản phẩm, phụ tùng và dịch vụ ô tô chính hãng. Uy tín - Chuyên nghiệp - Giá tốt.";
+    const defaultImage = configImageURL('thumbnail.png');
+    const defaultUrl = process.env.NEXT_PUBLIC_PUBLIC_URL || 'https://autofusion.vn';
 
     const titleView = title ? `${title} | ${defaultTitle}` : `${defaultDescription} | ${defaultTitle}`;
     const descriptionView = description || defaultDescription;

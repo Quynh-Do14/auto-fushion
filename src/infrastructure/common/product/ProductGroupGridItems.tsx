@@ -2,6 +2,7 @@ import { generateTempArray } from '@/infrastructure/utilities/common-helpers';
 import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import SkeletonProduct from '../skeleton/SkeletonProduct';
+import ProductSimple from './ProductSimple';
 
 type Props = {
     products: any[]
@@ -54,13 +55,13 @@ const ProductGroupGridItems = (props: Props) => {
             const items = products.map((item) => {
                 return (
                     <div className={classes} key={item.id}>
-                        <Product product={item} />
+                        <ProductSimple product={item} />
                     </div>
                 );
             });
             productItemsView = <div className="row">{items}</div>;
         } else {
-            productItemsView = <p>No product(s) found.</p>;
+            productItemsView = <p>Không tìm thấy sản phẩm.</p>;
         }
     } else {
         const skeletonItems = generateTempArray(columns * 2).map((item) => (

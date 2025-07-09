@@ -47,7 +47,7 @@ const HomeDefaultProductListing = (props: Props) => {
                 />
             );
         } else {
-            productItemsView = <p>No product(s) found.</p>;
+            productItemsView = <p>Không tìm thấy sản phẩm.</p>;
         }
     } else {
         const skeletons = generateTempArray(6).map((item) => (

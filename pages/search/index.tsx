@@ -10,6 +10,8 @@ const SearchPage = () => {
     const [productItems, setProductItems] = useState<Array<any>>([])
     const [pageSize] = useState(100);
     const [searchText, setsearchText] = useState('');
+    const [categoryId, setCategoryId] = useState<string>("");
+
     const [loading, setLoading] = useState<boolean>(false);
     const router = useRouter();
     const breadcrumb = [
@@ -22,9 +24,10 @@ const SearchPage = () => {
         },
     ];
 
-    const onGetListProductAsync = async ({ name = searchText }) => {
+    const onGetListProductAsync = async ({ name = searchText, category_id = categoryId }) => {
         const param = {
             search: name,
+            category_id: category_id,
         }
         try {
             await productService.GetProduct(
@@ -42,14 +45,15 @@ const SearchPage = () => {
     const onSearch = async (name = searchText) => {
         await onGetListProductAsync({ name: name }).then(_ => { });
     };
-    const { keyword } = router.query;
+    const { keyword, category_id } = router.query;
 
     useEffect(() => {
         const parsedSearch = (keyword as string) || "";
+        const parsedCategory = (category_id as string) || "";
         setsearchText(parsedSearch);
-
+        setCategoryId(parsedCategory);
         onSearch(parsedSearch);
-    }, [keyword]);
+    }, [keyword, category_id]);
 
     let shopItemsView, statusView;
     if (!loading) {

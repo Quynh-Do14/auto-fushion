@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/infrastructure/utilities/product-helper.js", "src/infrastructure/utilities/product-helper.js"  ],
   "exclude": [
     "node_modules"
   ]

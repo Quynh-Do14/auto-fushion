@@ -32,7 +32,7 @@ const HomeDefaultTopCategories = () => {
     return (
         <div className="ps-top-categories">
             <div className="ps-container">
-                <h3>Danh mục nổi bật    </h3>
+                <h3>Danh mục nổi bật</h3>
                 <div className="row">
                     {
                         listCategory.map((category) => (

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRecoilValue } from 'recoil'
 import { ProfileState } from '@/core/atoms/profile/profileState'
-
+import avatar from '@/asset/img/avatar.png'
 type Props = {
   isLoggedIn: boolean
   openModalLogout: () => void
@@ -12,16 +12,14 @@ const AccountQuickLinks = (props: Props) => {
   const profile = useRecoilValue(ProfileState).data;
   if (isLoggedIn === true) {
     return (
-      <div className='ps-block--user-account'>
-        <i className='icon-user'></i>
-        {profile?.name}
-        <div className='ps-block__content'>
-          <ul className='ps-list--arrow'>
-            <li className='ps-block__footer'>
-              <div onClick={openModalLogout}>
-                Đăng xuất
-              </div>
-            </li>
+      <div className="user-dropdown">
+        <div className="user-trigger">
+          <img src={avatar.src} alt="avatar" className="user-avatar" />
+          <span className="user-name">{profile?.name}</span>
+        </div>
+        <div className="dropdown-content">
+          <ul>
+            <li onClick={openModalLogout}>Đăng xuất</li>
           </ul>
         </div>
       </div>

@@ -113,7 +113,6 @@ const ProductPage = () => {
                 <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
                 <div className="ps-container">
                     <ShopBanner />
-                    <ShopBrands />
                     <div className="ps-layout--shop">
                         <div className="ps-layout__left">
                             <WidgetProductFilterByPriceRange
