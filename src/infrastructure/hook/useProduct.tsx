@@ -41,7 +41,7 @@ export default function useProduct() {
           <LazyLoad>
             <Image
               width={400}
-              height={250}
+              height={400}
               style={{ objectFit: 'cover', width: '100%', height: '150px' }}
               className="product-image"
               src={configImageURL(payload.image)}
@@ -54,7 +54,7 @@ export default function useProduct() {
         return (
           <LazyLoad>
             <Image width={400}
-              height={250}
+              height={400}
               style={{ objectFit: 'cover', width: '100%', height: '150px' }}
               className="product-image"
               src={NotFoundImg}

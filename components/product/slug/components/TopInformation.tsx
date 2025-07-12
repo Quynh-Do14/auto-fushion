@@ -8,12 +8,12 @@ type Props = {
 const TopInformation = (props: Props) => {
     const { product } = props;
     let priceView;
-
+    const sale_price = Number(product.price) - Number(product.price * product.percent_sale / 100)
     if (product.percent_sale) {
         priceView = (
             <h4 className="ps-product__price sale">
-                <del className="mr-2">{formatCurrency(Number(product.price))}</del>đ
-                {formatCurrency(Number(product.percent_sale))}đ
+                <del className="mr-2">{formatCurrency(Number(product.price))}</del>
+                {formatCurrency(Number(sale_price))}đ
             </h4>
         );
     } else {

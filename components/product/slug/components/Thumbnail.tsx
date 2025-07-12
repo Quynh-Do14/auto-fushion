@@ -6,6 +6,7 @@ import 'react-image-lightbox/style.css'
 import NextArrow from '@/infrastructure/common/carousel/NextArrow'
 import PrevArrow from '@/infrastructure/common/carousel/PrevArrow'
 import { configImageURL } from '@/infrastructure/helper/helper'
+import Image from 'next/image'
 
 type Props = {
   product: {
@@ -91,14 +92,20 @@ const ThumbnailDefault = (props: Props) => {
 
   const imagesView = productImages.map((item, index) => (
     <div className='item' key={item}>
-      <img src={item} alt={`Thumbnail ${index}`} />
+      <img
+        width={100}
+        height={100}
+        src={item}
+        alt={`Thumbnail ${index}`}
+        style={{ objectFit: 'cover', width: '100%', height: '100px'}}
+      />
     </div>
   ))
 
   const galleryImagesView = productImages.map((item, index) => (
     <div className='item' key={item}>
       <a href='#' onClick={(e) => handleOpenLightbox(e, index)}>
-        <img src={item} alt={`Product ${index}`} />
+        <Image src={item} alt={`Product ${index}`} width={800} height={800}/>
       </a>
     </div>
   ))

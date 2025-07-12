@@ -146,14 +146,14 @@ const BrandListPage = () => {
                             title={
                                 <TitleTableCommon
                                     title="Ảnh"
-                                    width={'150px'}
+                                    width={'300px'}
                                 />
                             }
                             key={"image"}
                             dataIndex={"image"}
                             render={(val, record) => {
                                 return (
-                                    <img src={configImageURL(val)} alt="" width={150} height={150} />
+                                    <img src={configImageURL(val)} alt="" width={300} height={"auto"}/>
                                 )
                             }}
                         />

@@ -64,12 +64,10 @@ const HeaderDefault = () => {
                         <SearchHeader />
                     </div>
                     <div className="header__right">
-                        <div className='header__actions'>
-                            <AccountQuickLinks
-                                isLoggedIn={token}
-                                openModalLogout={openModalLogout}
-                            />
-                        </div>
+                        <AccountQuickLinks
+                            isLoggedIn={token}
+                            openModalLogout={openModalLogout}
+                        />
                     </div>
                 </div>
             </div>

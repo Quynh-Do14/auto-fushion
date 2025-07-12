@@ -17,7 +17,7 @@ const CategoryPage = () => {
             url: '/',
         },
         {
-            text: 'Danh mục sản phẩm',
+            text: 'Danh mục & Thương hiệu sản phẩm ',
         },
     ];
 

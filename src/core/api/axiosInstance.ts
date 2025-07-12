@@ -91,10 +91,10 @@ axiosInstance.interceptors.response.use(
                 } catch (error) {
                     processQueue(error, null);
                     Cookies.remove('token');
-                    notification.error({
-                        message: 'Thông báo',
-                        description: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',
-                    });
+                    // notification.error({
+                    //     message: 'Thông báo',
+                    //     description: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.',
+                    // });
                     window.location.href = ROUTE_PATH.LOGIN;
                     return Promise.reject(error);
                 } finally {

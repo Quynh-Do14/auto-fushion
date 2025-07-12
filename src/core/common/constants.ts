@@ -10,7 +10,7 @@ export default class Constants {
       },
       {
         id: 2,
-        text: 'Danh mục',
+        text: 'Danh mục & Thương hiệu',
         url: ROUTE_PATH.CATEGORY,
 
       },

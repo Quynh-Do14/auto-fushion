@@ -40,19 +40,24 @@ const HomeDefaultBrand = () => {
                     <div className="row">
                         {
                             listBrand.map((brand) => (
-                                <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 ">
-                                    <div className="ps-block--category">
+                                <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 " style={{ marginBottom: 30 }}>
+                                    <div className="ps-block--category"
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}>
                                         <Link href={`/product?brand_id=${brand.id}`}>
                                             <a></a>
                                         </Link>
-                                        <Image
+                                        <img
+                                            // width={200}
+                                            // height={60}
+                                            style={{ objectFit: 'cover' }}
                                             src={configImageURL(brand.image)}
                                             alt={brand.name}
-                                            width={150}
-                                            height={80}
-                                            style={{ objectFit: 'contain' }}
                                         />
-                                        <p>{brand.name}</p>
+                                        {/* <p>{brand.name}</p> */}
                                     </div>
                                 </div>
                             ))

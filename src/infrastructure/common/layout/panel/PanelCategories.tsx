@@ -14,11 +14,10 @@ const PanelCategories = () => {
     return (
         <Menu
             mode="inline"
-            // openKeys={() => { }}
             onOpenChange={() => { }}>
             {categoryProduct.map(category => (
                 <Menu.Item key={category.id}>
-                    <a href={`/product?category=${category.id}`}>
+                    <a href={`/product?category_id=${category.id}`}>
                         {category.name}
                     </a>
                 </Menu.Item>

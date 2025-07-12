@@ -1,47 +1,64 @@
-import React, { useState } from 'react'
-import Link from 'next/link'
-import { useRecoilValue } from 'recoil'
-import { ProfileState } from '@/core/atoms/profile/profileState'
-import avatar from '@/asset/img/avatar.png'
+import React from 'react';
+import Link from 'next/link';
+import { Dropdown, Menu, Avatar } from 'antd';
+import { useRecoilValue } from 'recoil';
+import { ProfileState } from '@/core/atoms/profile/profileState';
+import { UserOutlined } from '@ant-design/icons';
+import ButtonHref from '../button/ButtonHref';
+
 type Props = {
-  isLoggedIn: boolean
-  openModalLogout: () => void
-}
-const AccountQuickLinks = (props: Props) => {
-  const { isLoggedIn, openModalLogout } = props
+  isLoggedIn: boolean;
+  openModalLogout: () => void;
+};
+
+const AccountQuickLinks = ({ isLoggedIn, openModalLogout }: Props) => {
   const profile = useRecoilValue(ProfileState).data;
-  if (isLoggedIn === true) {
-    return (
-      <div className="user-dropdown">
-        <div className="user-trigger">
-          <img src={avatar.src} alt="avatar" className="user-avatar" />
-          <span className="user-name">{profile?.name}</span>
-        </div>
-        <div className="dropdown-content">
-          <ul>
-            <li onClick={openModalLogout}>Đăng xuất</li>
-          </ul>
-        </div>
-      </div>
-    )
-  } else {
-    return (
-      <div className='ps-block--user-header'>
-        <div className='ps-block__left'>
-          <i className='icon-user'></i>
-        </div>
-        <div className='ps-block__right'>
-          <Link href='/auth/login'>
-            <a>Đăng nhập</a>
-          </Link>
-          <Link href='/auth/register'>
-            <a>Đăng kí</a>
-          </Link>
-        </div>
 
+  if (!isLoggedIn || !profile) {
+    return (
+      <div className="account-actions">
+        <ButtonHref
+          href="/auth/login"
+          title='Đăng nhập'
+          variant='ps-btn--gray'
+          width={110}
+        />
+        <ButtonHref
+          href="/auth/register"
+          title='Đăng ký'
+          variant='ps-btn--reverse'
+          width={110}
+        />
       </div>
-    )
+    );
   }
-}
 
-export default AccountQuickLinks
+  const menu = (
+    <Menu>
+      <Menu.Item key="profile">
+        <Link href="/profile">
+          <a>Hồ sơ</a>
+        </Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="logout" onClick={openModalLogout}>
+        Đăng xuất
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <Dropdown overlay={menu} placement="bottomRight" trigger={['click']}>
+      <div className="account-dropdown-trigger">
+        <Avatar
+          src={profile?.avatar || '/default-avatar.png'}
+          icon={!profile?.avatar && <UserOutlined />}
+          size={36}
+        />
+        <span className="account-name">{profile.name}</span>
+      </div>
+    </Dropdown>
+  );
+};
+
+export default AccountQuickLinks;
