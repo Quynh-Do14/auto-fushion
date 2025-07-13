@@ -5,6 +5,13 @@ export class Endpoint {
         static Profile = "/users/me/profile"
         static RefreshToken = "/auth/refresh-token"
     }
+    static Banner = class {
+        static Get = "/banner"
+        static GetById = "/banner"
+        static Add = "/banner"
+        static Update = "/banner"
+        static Delete = "/banner"
+    }
     static Product = class {
         static Get = "/product"
         static GetById = "/product"

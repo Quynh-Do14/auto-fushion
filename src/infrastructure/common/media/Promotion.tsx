@@ -14,9 +14,12 @@ const Promotion = (props: Props) => {
     return (
         <Link href={link || '/shop'}>
             <a className="ps-collection">
-                <Image
+                <img
                     src={image || banner}
-                    alt="martfury"
+                    alt="autofusion"
+                    width={400}
+                    height={200}
+                    style={{ objectFit: 'cover' }}
                 />
             </a>
         </Link>

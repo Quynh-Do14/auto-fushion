@@ -388,7 +388,7 @@
     }
 
     @include media('<lg') {
-        flex-flow: column-reverse wrap;
+        flex-flow: column wrap;
         .ps-layout__left {
             max-width: 100%;
             padding-right: 0;

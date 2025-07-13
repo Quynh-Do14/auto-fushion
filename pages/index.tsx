@@ -6,6 +6,7 @@ import HomeDefaultTopCategories from './home/HomeDefaultTopCategories'
 import MainLayoutPublic from '@/infrastructure/common/layout/MainLayout'
 import BreadCrumb from '@/infrastructure/common/breadcrumb/BreadCrumb'
 import HomeDefaultBrand from './home/HomeDefaultBrand'
+import ShopBanner from '@/infrastructure/common/banner/ShopBanner'
 
 const Home: NextPage = () => {
   const breadCrumb = [
@@ -21,7 +22,10 @@ const Home: NextPage = () => {
     <main id="homepage-1">
       <MainLayoutPublic>
         <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
-        <HomeDefaultBanner />
+        {/* <HomeDefaultBanner /> */}
+        <div className="ps-container">
+          <ShopBanner />
+        </div>
         {/* <HomeAdsColumns /> */}
         <HomeDefaultTopCategories />
         <HomeDefaultBrand />

@@ -6,8 +6,11 @@ import authService from '@/infrastructure/repository/auth/auth.service';
 import { ROUTE_PATH } from '@/core/common/appRouter';
 import { useRecoilValue } from 'recoil';
 import { ProfileState } from '@/core/atoms/profile/profileState';
+import ButtonHref from '../../button/ButtonHref';
+import { isTokenStoraged } from '@/infrastructure/utilities/storage';
 const PanelAccount = () => {
     const profile = useRecoilValue(ProfileState).data
+    const token = isTokenStoraged();
     const [isOpenModalLogout, setIsOpenModalLogout] = useState<boolean>(false)
     const openModalLogout = () => {
         setIsOpenModalLogout(true);
@@ -39,11 +42,36 @@ const PanelAccount = () => {
                     </li>
                 ))}
             </ul> */}
-            <ButtonCommon
-                onClick={handleLogout}
-                title={'Đăng xuất'}
-                variant={'ps-btn--fullwidth'}
-            />
+
+            {
+                token
+                &&
+                <ButtonCommon
+                    onClick={handleLogout}
+                    title={'Đăng xuất'}
+                    variant={'ps-btn--fullwidth'}
+                />
+            }
+            {
+                !token
+                &&
+                <ButtonHref
+                    href={ROUTE_PATH.LOGIN}
+                    title='Đăng nhập'
+                    variant='ps-btn--gray'
+                // width={110}
+                />
+            }
+            {
+                !token
+                &&
+                <ButtonHref
+                    href={ROUTE_PATH.REGISTER}
+                    title='Đăng kí'
+                    variant='ps-btn--black'
+                // width={110}
+                />
+            }
 
             <DialogConfirmCommon
                 message={'Bạn có muốn đăng xuất khỏi hệ thống??'}

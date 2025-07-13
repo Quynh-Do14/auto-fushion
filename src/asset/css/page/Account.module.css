@@ -1,6 +1,9 @@
 .sidebar {
   padding: 20px;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .list {

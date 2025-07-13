@@ -35,7 +35,7 @@ const CategoryPage = () => {
                         title={'Danh mục sản phẩm'}
                         dataList={categoryProduct} />
                     <CategoryShop
-                        title={'Thương hiệu'}
+                        title={'Tìm kiếm sản phẩm theo thương hiệu'}
                         dataList={brand} />
                 </div>
             </div>

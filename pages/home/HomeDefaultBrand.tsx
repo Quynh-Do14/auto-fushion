@@ -34,7 +34,7 @@ const HomeDefaultBrand = () => {
         <div className="ps-product-list">
             <div className="ps-container">
                 <div className="ps-section__header">
-                    <h3>Thương hiệu</h3>
+                    <h3>Tìm kiếm sản phẩm theo thương hiệu</h3>
                 </div>
                 <div className="ps-section__content">
                     <div className="row">

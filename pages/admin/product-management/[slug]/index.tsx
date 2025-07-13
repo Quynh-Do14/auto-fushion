@@ -226,7 +226,7 @@ const SlugProductManagement = () => {
                             <Row gutter={[16, 16]}>
                                 <Col span={24}>
                                     <InputTextCommon
-                                        label={"Tên danh mục"}
+                                        label={"Tên sản phẩm"}
                                         attribute={"name"}
                                         isRequired={true}
                                         dataAttribute={dataRequest.name}

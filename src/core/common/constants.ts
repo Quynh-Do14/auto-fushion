@@ -35,6 +35,12 @@ export default class Constants {
       },
       {
         id: 2,
+        text: 'Quản lý banner',
+        url: ROUTE_PATH.BANNER_MANAGEMENT, // nếu bạn có ROUTE_PATH này riêng
+        icon: 'fas fa-images'
+      },
+      {
+        id: 2,
         text: 'Quản lý thương hiệu',
         url: ROUTE_PATH.BRAND_MANAGEMENT, // nếu bạn có ROUTE_PATH này riêng
         icon: 'fas fa-tags'
@@ -126,6 +132,28 @@ export default class Constants {
         value: 4
       }
     ]
+  }
+  static BannerType = class {
+    static List = [
+      {
+        label: 'Banner chính',
+        value: "MAIN_BANNER"
+      },
+      {
+        label: 'Banner phụ',
+        value: "SUB_BANNER"
+      }
+    ]
+    static BannerTypeConfig = class {
+      static Main = {
+        label: 'Banner chính',
+        value: "MAIN_BANNER"
+      }
+      static Sub = {
+        label: 'Banner phụ',
+        value: "SUB_BANNER"
+      }
+    }
   }
   static AdminStatusConfig = class {
     static Show = [

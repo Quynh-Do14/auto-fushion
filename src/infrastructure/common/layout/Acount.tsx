@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { ProfileState } from '@/core/atoms/profile/profileState';
 import { UserOutlined } from '@ant-design/icons';
 import ButtonHref from '../button/ButtonHref';
+import { ROUTE_PATH } from '@/core/common/appRouter';
 
 type Props = {
   isLoggedIn: boolean;
@@ -18,15 +19,15 @@ const AccountQuickLinks = ({ isLoggedIn, openModalLogout }: Props) => {
     return (
       <div className="account-actions">
         <ButtonHref
-          href="/auth/login"
+          href={ROUTE_PATH.LOGIN}
           title='Đăng nhập'
           variant='ps-btn--gray'
           width={110}
         />
         <ButtonHref
-          href="/auth/register"
-          title='Đăng ký'
-          variant='ps-btn--reverse'
+          href={ROUTE_PATH.REGISTER}
+          title='Đăng kí'
+          variant='ps-btn--black'
           width={110}
         />
       </div>
