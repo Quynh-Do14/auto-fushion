@@ -1,31 +1,60 @@
-import Product from '@/infrastructure/common/product/Product';
+import ProductSimple from '@/infrastructure/common/product/ProductSimple';
 import SkeletonProduct from '@/infrastructure/common/skeleton/SkeletonProduct';
 import { generateTempArray } from '@/infrastructure/utilities/common-helpers';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
-    columns?: number
-    pageSize?: number
-    productItems: Array<any>
+    products: any[]
+    columns: number
+    pageSize: number
     loading: boolean
 }
 const ProductGroupGridItems = (props: Props) => {
     const {
-        columns = 3,
-        pageSize = 12,
-        productItems,
+        products,
+        columns,
+        pageSize,
         loading
-    } = props
+    } = props;
+
+    const [classes, setClasses] = useState(
+        'col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6'
+    );
+
+
+    function handleSetColumns() {
+        switch (columns) {
+            case 2:
+                setClasses('col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6');
+                return 3;
+                break;
+            case 4:
+                setClasses('col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6');
+                return 4;
+                break;
+            case 6:
+                setClasses('col-xl-2 col-lg-4 col-md-6 col-sm-6 col-6');
+                return 6;
+                break;
+
+            default:
+                setClasses('col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6');
+        }
+    }
+
+    useEffect(() => {
+        handleSetColumns();
+    }, [columns, pageSize]);
 
     // Views
     let productItemsView;
 
-    if (!loading && productItems) {
-        if (productItems.length > 0) {
-            const items = productItems.map((item, index) => {
+    if (!loading && products) {
+        if (products.length > 0) {
+            const items = products.map((item) => {
                 return (
-                    <div className={"col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6"} key={index}>
-                        <Product product={item} />
+                    <div className={classes} key={item.id}>
+                        <ProductSimple product={item} />
                     </div>
                 );
             });
@@ -35,7 +64,7 @@ const ProductGroupGridItems = (props: Props) => {
         }
     } else {
         const skeletonItems = generateTempArray(columns * 2).map((item) => (
-            <div className={"col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6"} key={item}>
+            <div className={classes} key={item}>
                 <SkeletonProduct />
             </div>
         ));

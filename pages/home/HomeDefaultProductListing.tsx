@@ -6,12 +6,13 @@ import { ProductGroupWithCarousel } from '@/infrastructure/common/product/Produc
 import productService from '@/infrastructure/repository/product/product.service';
 type Props = {
     title: string
+    loading: boolean
+    setLoading: Function
 }
 const HomeDefaultProductListing = (props: Props) => {
 
-    const { title } = props;
+    const { title, loading, setLoading } = props;
     const [productItems, setProductItems] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
 
     const onGetListCategoryAsync = async () => {
         const param = {

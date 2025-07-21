@@ -8,6 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { CategoryBlogState } from '@/core/atoms/category/categoryState';
 import { useRouter } from 'next/router';
 import blogService from '@/infrastructure/repository/blog/blog.service';
+import { PageLoading } from '@/infrastructure/common/loader/loadingPage';
 const breadCrumb = [
     {
         text: 'Trang chủ',
@@ -125,6 +126,7 @@ const BlogPage = () => {
                     </div>
                 </div>
             </div>
+            {/* <PageLoading isLoading={loading} /> */}
         </MainLayoutPublic>
     )
 }

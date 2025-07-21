@@ -18,7 +18,7 @@ const Promotion = (props: Props) => {
                     src={image || banner}
                     alt="autofusion"
                     width={400}
-                    height={200}
+                    height={250}
                     style={{ objectFit: 'cover' }}
                 />
             </a>

@@ -70,8 +70,8 @@ export default function AdminLayout({ breadcrumb, title, redirect, children }: a
         onGetListBrandAsync().then(_ => { });
     }, []);
 
-    const defaultTitle = 'Auto Fusion';
-    const defaultDescription = "Auto Fusion - Website chuyên cung cấp sản phẩm, phụ tùng và dịch vụ ô tô chính hãng. Uy tín - Chuyên nghiệp - Giá tốt.";
+    const defaultTitle = 'TRUNG TÂM PHỤ KIỆN ĐỒ CHƠI XE HƠI CAO CẤP AUTOFUSION';
+    const defaultDescription = "AutoFusion – nơi hội tụ đam mê công nghệ, sự tận tâm và cam kết bền vững dành cho khách hàng. Với triết lý “lấy khách hàng làm trọng tâm”, chúng tôi không ngừng nỗ lực nâng cao trải nghiệm dịch vụ, lấy uy tín làm cam kết và chất lượng làm niềm tin để xây dựng mối quan hệ bền vững với mỗi khách hàng.";
     const defaultImage = configImageURL('/uploads/thumbnail.png');
     const defaultUrl = process.env.NEXT_PUBLIC_PUBLIC_URL || 'https://autofusion.vn';
 

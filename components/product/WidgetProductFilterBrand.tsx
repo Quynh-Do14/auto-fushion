@@ -10,6 +10,29 @@ type Props = {
 }
 const WidgetProductFilterBrands = (props: Props) => {
     const { brand, setBrandId, brandId, loading } = props;
+    const router = useRouter();
+
+    const routeParams = (key: string, value: string) => {
+        const currentQuery = {
+            ...router.query,
+            [key]: value,
+        };
+
+        const sanitizedQuery: Record<string, string> = {};
+        Object.entries(currentQuery).forEach(([k, v]) => {
+            if (typeof v === 'string') {
+                sanitizedQuery[k] = v;
+            } else if (Array.isArray(v)) {
+                sanitizedQuery[k] = v[0]; // hoặc join nếu muốn giữ nhiều giá trị
+            } else if (v !== undefined) {
+                sanitizedQuery[k] = String(v);
+            }
+        });
+
+        const queryString = new URLSearchParams(sanitizedQuery).toString();
+        return queryString;
+    };
+
 
     const onSelectCategory = (item: any) => {
         setBrandId(String(item.id))
@@ -22,13 +45,13 @@ const WidgetProductFilterBrands = (props: Props) => {
                     onClick={() => onSelectCategory(item)}
                     key={item.id}
                     className={String(item.id) === brandId ? 'active' : ''}>
-                    <Link href={`/product?brand_id=${item.id}`}>{item.name}</Link>
+                    <Link href={`/product?${routeParams('brand_id', item.id)}`}>{item.name}</Link>
                 </li>
             ));
             categoriesView =
                 <ul className="ps-list--categories">
                     <li >
-                        <Link href={`/product`}>Tất cả</Link>
+                        <Link href={`/product?${routeParams('brand_id', "")}`}>Tất cả</Link>
                     </li>
                     {items}
                 </ul>;

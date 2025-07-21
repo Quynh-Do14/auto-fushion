@@ -8,10 +8,14 @@ import { useEffect, useState } from 'react';
 import Constants from '@/core/common/constants';
 import bannerService from '@/infrastructure/repository/banner/banner.service';
 import { configImageURL } from '@/infrastructure/helper/helper';
-const HomeDefaultBanner = () => {
+type Props = {
+    setLoading: Function
+}
+const HomeDefaultBanner = (props: Props) => {
+    const { setLoading } = props;
+
     const [listBanner, setListBanner] = useState<Array<any>>([]);
     const [listSub, setListSub] = useState<Array<any>>([]);
-    const [loading, setLoading] = useState<boolean>(false);
 
     const onGetListBannerAsync = async () => {
         const paramMain = {
@@ -56,24 +60,24 @@ const HomeDefaultBanner = () => {
         banner,
     ]
 
-const carouselSetting = {
-    dots: false,
-    infinite: true,
-    speed: 750,
-    fade: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,           // Tự động chạy
-    autoplaySpeed: 3000,      // Chuyển ảnh mỗi 3 giây
-    nextArrow: <NextArrow
-        className={''}
-        onClick={() => { }}
-    />,
-    prevArrow: <PrevArrow
-        className={''}
-        onClick={() => { }}
-    />,
-};
+    const carouselSetting = {
+        dots: false,
+        infinite: true,
+        speed: 750,
+        fade: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,           // Tự động chạy
+        autoplaySpeed: 3000,      // Chuyển ảnh mỗi 3 giây
+        nextArrow: <NextArrow
+            className={''}
+            onClick={() => { }}
+        />,
+        prevArrow: <PrevArrow
+            className={''}
+            onClick={() => { }}
+        />,
+    };
 
     // Views
     let mainCarouselView;

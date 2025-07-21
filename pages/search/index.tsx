@@ -5,6 +5,7 @@ import BreadCrumb from '@/infrastructure/common/breadcrumb/BreadCrumb';
 import MainLayoutPublic from '@/infrastructure/common/layout/MainLayout';
 import ProductGroupGridItems from '../../components/search/ProductGroupGridItems';
 import productService from '@/infrastructure/repository/product/product.service';
+import ProductSimple from '@/infrastructure/common/product/ProductSimple';
 
 const SearchPage = () => {
     const [productItems, setProductItems] = useState<Array<any>>([])
@@ -60,7 +61,7 @@ const SearchPage = () => {
         if (productItems) {
             shopItemsView = (
                 <ProductGroupGridItems
-                    productItems={productItems}
+                    products={productItems}
                     columns={6}
                     pageSize={pageSize}
                     loading={loading}
@@ -70,7 +71,7 @@ const SearchPage = () => {
                 const items = productItems.map((item) => {
                     return (
                         <div className="col-md-3 col-sm-6 col-6" key={item.id}>
-                            <Product product={item} />
+                            <ProductSimple product={item} />
                         </div>
                     );
                 });

@@ -13,6 +13,7 @@ import { CategoryProductState } from '@/core/atoms/category/categoryState';
 import CustomPagination from '@/infrastructure/common/pagination/CustomPagination';
 import { BrandState } from '@/core/atoms/brand/brandState';
 import WidgetProductFilterBrands from '../../components/product/WidgetProductFilterBrand';
+import { PageLoading } from '@/infrastructure/common/loader/loadingPage';
 
 const ProductPage = () => {
     const breadCrumb = [
@@ -152,6 +153,7 @@ const ProductPage = () => {
                     </div>
                 </div>
             </div>
+            {/* <PageLoading isLoading={loading} /> */}
         </MainLayoutPublic>
     )
 }
