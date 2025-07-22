@@ -39,8 +39,8 @@ const HomeDefaultBrand = (props: Props) => {
         dots: false,
         infinite: true,
         speed: 750,
-        slidesToShow: 7,
-        slidesToScroll: 1,
+        slidesToShow: 8,
+        slidesToScroll: 3,
         arrows: true,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
@@ -49,7 +49,7 @@ const HomeDefaultBrand = (props: Props) => {
             {
                 breakpoint: 1750,
                 settings: {
-                    slidesToShow: 7,
+                    slidesToShow: 8,
                     slidesToScroll: 3,
                     dots: true,
                     arrows: false,
