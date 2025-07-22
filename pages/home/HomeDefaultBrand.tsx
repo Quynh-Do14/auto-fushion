@@ -39,7 +39,7 @@ const HomeDefaultBrand = (props: Props) => {
         dots: false,
         infinite: true,
         speed: 750,
-        slidesToShow: 9,
+        slidesToShow: 7,
         slidesToScroll: 1,
         arrows: true,
         nextArrow: <NextArrow />,
@@ -138,7 +138,6 @@ const HomeDefaultBrand = (props: Props) => {
                     </div> */}
                         <Slider
                             {...setting}
-                            infinite={listBrand.length > 7}
                             className="ps-carousel outside brand-slider"
                         >
                             {listBrand.map((brand, index) => (
